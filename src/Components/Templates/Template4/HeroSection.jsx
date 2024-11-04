@@ -41,6 +41,7 @@ const HeroSection = () => {
         <img
           src={image}
           alt='Company logo'
+          className='object-cover w-full h-full'
          
         />
       ) : (
