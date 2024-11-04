@@ -176,7 +176,7 @@ const handleSelectedRows = (state) => {
         },
       ];
   
-  
+   
 
   // Define table columns
   const columns = [

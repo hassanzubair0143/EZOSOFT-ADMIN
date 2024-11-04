@@ -31,7 +31,7 @@ function App() {
     
     <BrowserRouter>
     <Routes>
-    <Route exact path='/' element={<EditTemplate8/>}/>
+    <Route exact path='/' element={<InputData/>}/>
     <Route exact path='/template8' element={<Template8/>}/>
     <Route exact path='/editTemplate7' element={<EditTemplate7/>} />
     <Route exact path='/template7' element={<Template7/>} />
