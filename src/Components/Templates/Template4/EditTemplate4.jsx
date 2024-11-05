@@ -477,7 +477,7 @@ const EditTemplate4 = () => {
             <div key={index} className='flex gap-4'>
             <h2> {index +1} Project Done</h2>
             <label htmlFor={`done ${index+1}`}></label>
-            <input type='date'
+            <input type='text'
               value={done}
               onChange={(e)=>{
                 if(index === 0) setDone1(e.target.value);
