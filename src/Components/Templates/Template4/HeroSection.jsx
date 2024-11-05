@@ -110,19 +110,19 @@ const HeroSection = () => {
         <div className='lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
            <ul className='list-disc '>
    <li>
-      <p className='text-[24px] font-[400] font-inter'>{obj1 || 'not given'}</p>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj1 || 'not given'}</p>
     </li>
 
     {obj2 && ( <li>
-      <p className='text-[24px] font-[400] font-inter'>{obj2}</p>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj2}</p>
     </li>)}
 
     {obj3 && ( <li>
-      <p className='text-[24px] font-[400] font-inter'>{obj3}</p>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj3}</p>
     </li>)}
 
     {obj4 && ( <li>
-      <p className='text-[24px] font-[400] font-inter'>{obj4}</p>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj4}</p>
     </li>)}
 
       
