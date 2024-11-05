@@ -394,7 +394,7 @@ const EditTemplate5 = () => {
                     <div className="flex gap-4">
                         <div className='gap-2'>
                             <label htmlFor="owner" className="text-gray-600">Owner</label>
-                            <input type="date" name="owner" value={owner} onChange={(e) => setOwner(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="owner" value={owner} onChange={(e) => setOwner(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="ownerSign" className="text-gray-600">Sign</label>
@@ -402,7 +402,7 @@ const EditTemplate5 = () => {
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="ownerdate" className="text-gray-600">Project Owner</label>
-                            <input type="date" name="ownerdate" value={ownerdate} onChange={(e) => setOwnerdate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="ownerdate" value={ownerdate} onChange={(e) => setOwnerdate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         
                     </div>
@@ -411,7 +411,7 @@ const EditTemplate5 = () => {
                     <div className="flex gap-4">
                         <div className='gap-2'>
                             <label htmlFor="sponser" className="text-gray-600">Sponser</label>
-                            <input type="date" name="sponser" value={sponser} onChange={(e) => setSponser(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="sponser" value={sponser} onChange={(e) => setSponser(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="sponserSign" className="text-gray-600">Sign</label>
@@ -419,7 +419,7 @@ const EditTemplate5 = () => {
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="sponserDate" className="text-gray-600">Date</label>
-                            <input type="date" name="sponserDate" value={sponserDate} onChange={(e) => setSponserDate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="sponserDate" value={sponserDate} onChange={(e) => setSponserDate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         
                     </div>
@@ -428,7 +428,7 @@ const EditTemplate5 = () => {
                     <div className="flex gap-4">
                         <div className='gap-2'>
                             <label htmlFor="manager" className="text-gray-600">Manager</label>
-                            <input type="date" name="manager" value={manager} onChange={(e) => setManager(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="manager" value={manager} onChange={(e) => setManager(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="managerSign" className="text-gray-600">Sign</label>
@@ -436,7 +436,7 @@ const EditTemplate5 = () => {
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="managerDate" className="text-gray-600">Date</label>
-                            <input type="date" name="managerDate" value={managerDate} onChange={(e) => setManagerDate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="managerDate" value={managerDate} onChange={(e) => setManagerDate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         
                     </div>
@@ -444,7 +444,7 @@ const EditTemplate5 = () => {
                     <div className="flex gap-4 flec-col">
                         <div className='gap-2'>
                             <label htmlFor="stakeholder" className="text-gray-600">Stakeholder</label>
-                            <input type="date" name="stakeholder" value={stakeholder} onChange={(e) => setStakeholder(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="stakeholder" value={stakeholder} onChange={(e) => setStakeholder(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="stakeholderSign" className="text-gray-600">Sign</label>
@@ -452,7 +452,7 @@ const EditTemplate5 = () => {
                         </div>
                         <div className='gap-2'>
                             <label htmlFor="stakeDate" className="text-gray-600">Date</label>
-                            <input type="date" name="stakeDate" value={stakeDate} onChange={(e) => setStakeDate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" name="stakeDate" value={stakeDate} onChange={(e) => setStakeDate(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
                         
                         
