@@ -311,7 +311,7 @@ const EditTemplate4 = () => {
 
            <div className='flex items-center gap-4'>
            <label htmlFor={pdtext2}>Add text 2</label>
-            <input type='date'
+            <input type='text'
              value={pdtext2} 
              onChange={(e)=>setDtext2(e.target.value)} 
              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -334,7 +334,7 @@ const EditTemplate4 = () => {
 
            <div className='flex items-center gap-4'>
            <label htmlFor={meeting2}>Meeting 2</label>
-            <input type='date'
+            <input type='text'
              value={meeting2} 
              onChange={(e)=>setMeeting2(e.target.value)} 
              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -342,7 +342,7 @@ const EditTemplate4 = () => {
 
            <div className='flex items-center gap-4'>
            <label htmlFor={meeting3}>Meeting 3</label>
-            <input type='date'
+            <input type='text'
              value={meeting3} 
              onChange={(e)=>setMeeting3(e.target.value)} 
              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
