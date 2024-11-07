@@ -323,11 +323,7 @@ const HeroSection = () => {
               
                 
           </table>
-          </div>
-
-
-       
-        
+          </div>       
     
     </>
   )

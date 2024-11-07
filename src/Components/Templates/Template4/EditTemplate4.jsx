@@ -1,6 +1,15 @@
 import { Pending } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ProjectInfo from '/src/assets/images/project-information-logo.svg'
+import MeetingGoal from '/src/assets/images/Meeting.svg'
+import MeetingObjectives from '/src/assets/images/Meeting-objectives.svg'
+import Constraints from '/src/assets/images/constraints.svg'
+import Assumptions from '/src/assets/images/assumptions.svg'
+import ProjectInformation from '/src/assets/images/project-information.svg'
+import DeliverAble from '/src/assets/images/project-deliverable.svg'
+import MeetingAgenda from '/src/assets/images/Meeting-agenda.svg'
+import ProjectStatusIcon from '/src/assets/images/project-status.svg'
 
 const EditTemplate4 = () => {
   const [title, setTitle] = useState('');
@@ -102,10 +111,22 @@ const EditTemplate4 = () => {
       },
     });
   };
+  const getStatus = (status)=>{
+    switch(status){
+        case 'In Progress':
+        return 'bg-[#FFFF00]';
+        case 'Completed':
+            return 'bg-blue text-white';
+        case 'Not Started':
+            return 'bg-[#FB0200] text-white';
+         default:
+         return '';
+    }
+}
 
   return (
-    <div className="flex items-center justify-center min-h-screen py-10 bg-gray-100">
-      <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
+    <div className="flex py-10 bg-gray-100 full ">
+      <div className="w-full p-8 bg-white rounded-lg shadow-lg ">
         <h1 className="mb-6 text-2xl font-bold text-center">Meeting Input Form</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -501,8 +522,371 @@ const EditTemplate4 = () => {
             Submit
           </button>
         </form>
+
+
+
+{/* previews */}
+   <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
+      <div className='w-full lg:px-[60px] xl:px-[60px] md:px-[30px] px-[15px] flex lg:flex-row xl:flex-row flex-col'>
+        <div className='mt-[40px] lg:w-[50%] xl:w-[50%] w-[100%]'>
+         <h2 className='text-[67px] leading-[81px] font-[Inter] text-white'>{title || 'One Pager Team Meeting Charter'}</h2>
+         <p className='mt-[33px] text-[22px] text-white'>{description || 'This one pager covers meeting charter summarizing project goals & objectives.It also includes elements such as project status, deliverables, constraints assumptions,team members, stakeholders and project milestones, etc'}</p>
+         
+         <div className=' mt-[38px] w-[333px] h-[56px] max-w-[350px] w-full bg-clay text-green flex items-center justify-center'>
+         {image ? (
+        <img
+          src={image}
+          alt='Company logo'
+          className='object-cover w-full h-full'
+         
+        />
+      ) : (
+        <p>No image uploaded.</p>
+      )}
+         </div>
+
+        </div>
+
+ {/* overlayed div */}
+
+        <div className='lg:w-[50%] xl:w-[50%] w-[100%] w-full bg-clay mt-[40px] '>
+        <div className='mt-[56px] flex gap-2'>
+        <div className=' ml-[20px] w-[44px] h-[44px] flex items-center justify-center border border-green bg-white rounded-full'>
+          <img src={ProjectInfo} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green'>Project Information</h2>
+        </div>
+        <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
+        <div className='lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
+           <ul className='list-disc '>
+      <li>
+      <p className='text-[24px] font-[400] font-inter'>{info1 || 'information not given'}</p>
+    </li>
+
+    {info2 && (<li>
+      <p className='text-[24px] font-[400] font-inter'>{info2}</p>
+    </li>)}
+
+    {info3 && (<li>
+      <p className='text-[24px] font-[400] font-inter'>{info3}</p>
+    </li>)}
+    
+           </ul>
+        </div>
+
+
+
+        <div className='mt-[18px] flex gap-2'>
+        <div className=' ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+          <img src={MeetingGoal} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Meeting Goals</h2>
+        </div>
+        <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
+        <div className={`lg:ml-[70px] xl:ml-[70px] mt-[16px]  py-[8px] px-[30px] bg-[url('/src/assets/images/bgArrow1.svg')] bg-no-repeat`}>
+           
+            <p className='text-[24px] font-[400] font-[Inter]'>{meetinggoals || 'not described'}</p>
+           
+       </div>
+       {meetinggoals2 && (
+  <div className={`lg:ml-[70px] xl:ml-[70px] mt-[16px] py-[8px] px-[30px] bg-[url('/src/assets/images/bgArroe2.svg')] bg-no-repeat`}>
+    <p className='text-[24px] font-[400] font-[Inter]'>{meetinggoals2}</p>
+  </div>
+)}
+
+
+      <div className='mt-[20px] flex gap-2'>
+        <div className=' ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+          <img src={MeetingObjectives} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Meeting Objectives</h2>
+        </div>
+        <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
+{/* meeting objectives */}
+        <div className='lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
+           <ul className='list-disc '>
+   <li>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj1 || 'not given'}</p>
+    </li>
+
+    {obj2 && ( <li>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj2}</p>
+    </li>)}
+
+    {obj3 && ( <li>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj3}</p>
+    </li>)}
+
+    {obj4 && ( <li>
+      <p className='text-[24px] font-[400] font-[Inter]'>{obj4}</p>
+    </li>)}
+
+      
+
+    
+    
+    
+   
+           </ul>
+        </div>
+
+ {/* constraints and assumption */}
+
+         <div className='flex w-[100%] pr-[47px]'>
+        <div className='w-[50%]'>
+        <div className='mt-[20px] flex gap-2 '>
+        <div className=' ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+          <img src={Constraints} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Constraints</h2>
+        </div>
+        <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
+         </div>
+
+         <div className='w-[50%] '>
+        <div className='mt-[20px] flex  gap-2 '>
+        <div className=' ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+          <img src={Assumptions} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Assumptions</h2>
+        </div>
+        <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
+         </div>
+        </div>
+        <div className='mr-[35px] my-[20px] lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px] border border-lightClay'>
+
+        <div className='flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons1 || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption1 || 'N/A'}</p>
+            </div>
+
+            <div className='flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons2 || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption2 || 'N/A'}</p>
+            </div>
+
+            <div className='flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons3 || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay flex p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption3 || 'N/A'}</p>
+            </div>
+            
+        </div>
+
+        
+        
+        </div>
+
+
+      </div>
+      </div>
+
+      <div className='mt-[20px] lg:w-[50%] xl:w-[50%] w-full lg:px-[60px] px-[20px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[900px] translate-y-[1400px]'>
+      <div className='flex items-center gap-2'>
+        <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border border-green bg-white rounded-full'>
+          <img src={ProjectInformation} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green text-nowrap '>Project Information</h2>
+        </div>
+        <div className=' border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
+{/* project information */}
+     <div className='border border-lightClay w-[100%] mt-[16px]'>
+     <div className='flex border-b border-lightClay'>
+            <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Name</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pName || 'N/A'}</p>
+            </div>
+
+            <div className='flex border-b border-lightClay'>
+            <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Start Date</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pStartDate||'N/A'}</p>
+            </div>
+
+            <div className='flex border-b border-lightClay'>
+            <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Estimated Completion</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pEndDate || 'N/A'}</p>
+            </div>
+
+            <div className='flex border-b border-lightClay'>
+            <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Budget</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pBudget || "N/A"}</p>
+            </div>
+
+            <div className='flex '>
+            <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Add Text Here</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pDesc  || 'N/A'}</p>
+
+            </div>
+     </div>
+
+
+     <div className='mt-[30px] flex gap-2 items-center'>
+        <div className=' -ml-[20px] w-[44px] h-[44px] flex items-center justify-center border border-green bg-white rounded-full'>
+          <img src={DeliverAble} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Project Deliverables</h2>
+        </div>
+        <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
+            
+       <div className='w-full mt-[19px] border border-lightClay'>
+       
+            <p className='border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Sponsor will provide required licenses & plugins</p> 
+            <p className='border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext1 || 'N/A'}</p> 
+            <p className=' p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext2 || 'N/A'}</p> 
+          
+       </div>
+
+        </div>
+
+{/* meeting agenda table */}
+
+
+   <div className='w-full  lg:px-[65px] px-[20px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[1300px] translate-y-[1500px] overflow-x-auto'>
+          
+          <div className='mt-[20px] flex  gap-2 '>
+          <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+            <img src={MeetingAgenda} alt='project information'/>
+          </div>
+          <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Meeting Agenda</h2>
+          </div>
+          <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
+  
+            <table className='mt-[16px] max-w-[100%] w-full border border-lightClay'>
+              <thead className='bg-clay'>
+                <tr>
+                  <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Meetings</th>
+                  <th className='border-b border-r max-w-[30%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Purpose</th>
+                  <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Medium</th>
+                  <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Frequency</th>
+                  <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Audience</th>
+  
+                </tr>
+  
+              </thead>
+              <tbody>
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Kick off meeting</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Project introduction: Review project goals & objectives</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>In Person</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Once</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>project team sponser stakeholders</td>
+                </tr>
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting1 ||  'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose1 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium1||'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq1 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud1 ||  'N/A'}</td>
+  
+                </tr>
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting2 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose2 ||  'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium2  || 'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq2 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud2 ||  'N/A'}</td>
+                </tr>
+  
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting3 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose3 ||   'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium3  || 'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq3 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud3 ||  'N/A'}</td>
+                </tr>
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting4 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose4  || 'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium4  || 'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq4 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud4 ||  'N/A'}</td>
+                </tr>
+  
+  
+              </tbody>
+                
+                  
+            </table>
+            </div>       
+{/* project status */}
+
+<div className='w-full  lg:px-[65px] px-[20px] pb-[50px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[1300px] translate-y-[1500px] overflow-x-auto'>
+          
+          <div className='mt-[20px] flex  gap-2 '>
+          <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+            <img src={ProjectStatusIcon} alt='project information'/>
+          </div>
+          <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Project Status</h2>
+          </div>
+          <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
+  
+            <table className='mt-[16px] max-w-[100%] w-full border border-lightClay'>
+              <thead className='bg-clay'>
+                <tr>
+                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Milestones</th>
+                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>status</th>
+                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Due</th>
+                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Done</th>
+  
+                </tr>
+  
+              </thead>
+              <tbody>
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Requirement Gathering</td>
+                <td className={`${getStatus(`${pStatus1}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus1 ||  'N/A'}</td>
+
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due1 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done1 || 'N/A'}</td>
+                </tr>
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Current Business Process Analysis</td>
+                <td className={`${getStatus(`${pStatus2}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus2 ||  'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due2 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done2 || 'N/A'}</td>
+                </tr>
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Project Presentation</td>
+                <td className={`${getStatus(`${pStatus3}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus3 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due3 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done3 || 'N/A'}</td>
+                </tr>
+  
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Add text Here</td>
+                <td className={`${getStatus(`${pStatus4}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus4 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due4 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done4 || 'N/A'}</td>
+                </tr>
+  
+  
+  
+              </tbody>
+                
+                  
+            </table>
+            </div>
+
+      
       </div>
     </div>
+
+
+
+  // preview
+    
   );
 };
 
