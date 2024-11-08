@@ -43,22 +43,31 @@ const EditTemplate4 = () => {
   const [meeting2, setMeeting2] = useState('');
   const [meeting3, setMeeting3] = useState('');
   const [meeting4, setMeeting4] = useState('');
+  const [meeting5, setMeeting5] = useState('')
   const [purpose1, setPurpose1] = useState('');
   const [purpose2, setPurpose2] = useState('');
   const [purpose3, setPurpose3] = useState('');
   const [purpose4, setPurpose4] = useState('');
+  const [purpose5, setPurpose5] = useState('');
   const [medium1, setMedium1] = useState('');
   const [medium2, setMedium2] = useState('');
   const [medium3, setMedium3] = useState('');
   const [medium4, setMedium4] = useState('');
+  const [medium5, setMedium5] = useState('');
   const [freq1, setFreq1] = useState('');
   const [freq2, setFreq2] = useState('');
   const [freq3, setFreq3] = useState('');
   const [freq4, setFreq4] = useState('');
+  const [freq5, setFreq5] = useState('');
   const [aud1, setAud1] = useState('');
   const [aud2, setAud2] = useState('');
   const [aud3, setAud3] = useState('');
   const [aud4, setAud4] = useState('');
+  const [aud5, setAud5] = useState('');
+  const [milestone1, setMilestone1] = useState('');
+  const [milestone2, setMilestone2] = useState('');
+  const [milestone3, setMilestone3] = useState('');
+  const [milestone4, setMilestone4] = useState('');
   const [pStatus1, setpStatus1] = useState('');
   const [pStatus2, setpStatus2] = useState('');
   const [pStatus3, setpStatus3] = useState('');
@@ -73,6 +82,37 @@ const EditTemplate4 = () => {
   const [done4,setDone4] = useState('');
 
   const [fileName, setFileName] = useState(null);
+  const [fields, setFields] = useState([{
+    meeting1: '',
+    purpose1: '',
+    medium1: '',
+    freq1: '',
+    aud1: ''
+  }]);
+
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleAddMore = () => {
+    if (clickCount < 5) {
+      setFields([
+        ...fields,
+        {
+          meeting: '',
+          purpose: '',
+          medium: '',
+          freq: '',
+          aud: ''
+        }
+      ]);
+      setClickCount(clickCount + 1);
+    }
+  };
+
+  const handleChange = (e, index, field) => {
+    const updatedFields = [...fields];
+    updatedFields[index][field] = e.target.value;
+    setFields(updatedFields);
+  };
   
   
   
@@ -149,7 +189,7 @@ const EditTemplate4 = () => {
            <div className="flex items-center justify-center sm:gap-[20px]">
   <label htmlFor="image">Logo:</label>
   <div
-    className="bg-[#F9F9F9] h-[40px] w-[140px] border border-dashed border-[#D9D9D9] flex items-center justify-center cursor-pointer rounded-lg"
+    className="bg-[#F9F9F9] h-[40px] w-[140px] border border-dashed border-[#293950] flex items-center justify-center cursor-pointer rounded-lg"
     onClick={() => document.getElementById('image').click()} // This triggers the file input click
   >
     <input
@@ -404,9 +444,10 @@ const EditTemplate4 = () => {
           {/* meeting agenda */}
           <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Meeting Agenda</h2>
            
-           <div className='grid md:grid-cols-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
+           <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
             
-           <div className='flex flex-col'>
+          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='flex flex-col'>
            <label htmlFor={meeting1}>Meetings</label>
             <input type='text'
             placeholder='type here'
@@ -450,19 +491,65 @@ const EditTemplate4 = () => {
              onChange={(e)=>setAud1(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
-           
-            <div className='flex items-center justify-center'>
-            <button type='button' className='mt-[10px] w-[150px] bg-[#F9F9F9] px-4 py-2 border border-dashed border-[#D9D9D9] rounded-lg'>Add more</button>
-            </div>
-             
-  
-           
           </div>
 
-          {/* purpose */}
-          <h2 className='font-bold'>Meeting Purpose</h2>
-          {[,purpose2,purpose3,purpose4].map((purpose,index)=>(<div key={index} className='flex gap-4'>
-            <h2>purpose {index +1}</h2>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[30px]'>
+          <div className='flex flex-col'>
+           <label htmlFor={meeting2}>Meetings</label>
+            <input type='text'
+            placeholder='type here'
+             value={meeting2} 
+             onChange={(e)=>setMeeting2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={purpose2}>Purpose</label>
+            <input type='text'
+            placeholder='type here'
+             value={purpose2} 
+             onChange={(e)=>setPurpose2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={medium2}>Medium</label>
+            <input type='text'
+            placeholder='type here'
+             value={medium2} 
+             onChange={(e)=>setMedium2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={freq2}>Frequency</label>
+            <input type='text'
+            placeholder='type here'
+             value={freq2} 
+             onChange={(e)=>setFreq2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={aud2}>Audience</label>
+            <input type='text'
+            placeholder='type here'
+             value={aud2} 
+             onChange={(e)=>setAud2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+           <div className='flex items-center justify-center mt-[25px] '>
+            <button type='button' onClick={handleAddMore} className='w-[150px] bg-[#F9F9F9] px-4 py-2 border border-dashed border-[#293950] rounded-lg'>Add more</button>
+            </div>
+          
+          </div>
+
+          
+          </div>
+         
+          
+
+          {/*
             <label htmlFor={`purpose${index+1}`}></label>
             <input type='text'
               value={purpose}
@@ -470,146 +557,69 @@ const EditTemplate4 = () => {
                 if(index === 0) setPurpose1(e.target.value);
                 if(index === 1) setPurpose2(e.target.value);
                 if(index === 2) setPurpose3(e.target.value);
-                if(index === 3) setPurpose4(e.target.value);
-              }}
-              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>))}
-
-          {/* Medium */}
-          <h2 className='font-bold'>Meeting Medium</h2>
-          {[
-          medium2,medium3,medium4].map((medium,index)=>(<div key={index} className='flex gap-4'>
-            <h2>Medium {index +1}</h2>
-            <label htmlFor={`medium${index+1}`}></label>
-            <input type='text'
-              value={medium}
-              onChange={(e)=>{
-                if(index === 0) setMedium1(e.target.value);
-                if(index === 1) setMedium2(e.target.value);
-                if(index === 2) setMedium3(e.target.value);
-                if(index === 3) setMedium4(e.target.value);
-              }}
-              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>))}
-
-           {/* Frequency */}
-           <h2 className='font-bold'>Meeting Frequency</h2>
-          {[,freq2,freq3,freq4].map((freq,index)=>(<div key={index} className='flex gap-4'>
-            <h2>Frequency {index +1}</h2>
-            <label htmlFor={`Frequency ${index+1}`}></label>
-            <input type='text'
-              value={freq}
-              onChange={(e)=>{
-                if(index === 0) setFreq1(e.target.value);
-                if(index === 1) setFreq2(e.target.value);
-                if(index === 2) setFreq3(e.target.value);
-                if(index === 3) setFreq4(e.target.value);
-              }}
-              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>))}
-
-           {/* Aundience */}
-           <h2 className='font-bold'>Meeting Audience</h2>
-          {[,aud2,aud3,aud4].map((aud,index)=>(
-            <div key={index} className='flex gap-4'>
-            <h2>Audience {index +1}</h2>
-            <label htmlFor={`aud ${index+1}`}></label>
-            <input type='text'
-              value={aud}
-              onChange={(e)=>{
-                if(index === 0) setAud1(e.target.value);
-                if(index === 1) setAud2(e.target.value);
-                if(index === 2) setAud3(e.target.value);
-                if(index === 3) setAud4(e.target.value);
-              }}
-              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>))}
-
+                if(index === 3) setPurpose4(e.target.value); */}
+      
           {/* project status */}
           
-          <div className='flex flex-col gap-4'>
-          <h2 className='font-bold'>Project Status</h2>
-          {[pStatus1,pStatus2,pStatus3,pStatus4].map((pStatus,index)=>(
-            <div key={index} className='flex flex-col gap-4'>
-               <label htmlFor={`pStatus-${index + 1}`} className='font-[500]'>{index +1 } Project Status</label>
-               <select value={pStatus} onChange={(e)=>{
-                if(index===0) return setpStatus1(e.target.value)
-                if(index===1) return setpStatus2(e.target.value)
-                if(index===2) return setpStatus3(e.target.value)
-                if(index===3) return setpStatus4(e.target.value)
-               }}
-                className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-               >
-                 <option value= "">select status </option>
+          <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Project Status</h2>
+           
+           <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
+            
+          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='flex flex-col'>
+           <label htmlFor={milestone1}>Milestones</label>
+            <input type='text'
+            placeholder='type here'
+             value={milestone1} 
+             onChange={(e)=>setMilestone1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pStatus1}>Status</label>
+            <select
+             value={pStatus1} 
+             onChange={(e)=>setpStatus1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
+               <option value= "">select status </option>
                  <option value="Not Started">Not Started</option>
                  <option value="Completed">Completed</option>
                  <option value="Pending">Pending</option>
                  <option value="In Progress">In Progress</option>
-             
-               </select>
-          </div>))}
-          </div>
-           
+             </select>
+           </div>
 
-            {/* Due */}
-            <h2 className='font-bold'>Due</h2>
-          {[due1,due2,due3,due4].map((due,index)=>(
-            <div key={index} className='flex gap-4'>
-            <h2>Due {index +1}</h2>
-            <label htmlFor={`due ${index+1}`}></label>
-            <input type='date'
-              value={due}
-              onChange={(e)=>{
-                if(index === 0) setDue1(e.target.value);
-                if(index === 1) setDue2(e.target.value);
-                if(index === 2) setDue3(e.target.value);
-                if(index === 3) setDue4(e.target.value);
-              }}
-              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>))}
-
-          {/* done */}
-          <h2 className='font-bold'>Done</h2>
-          {[done1,done2, done3 , done4].map((done,index)=>(
-            <div key={index} className='flex gap-4'>
-            <h2> {index +1} Project Done</h2>
-            <label htmlFor={`done ${index+1}`}></label>
+           <div className='flex flex-col'>
+           <label htmlFor={due1}>Due</label>
             <input type='text'
-              value={done}
-              onChange={(e)=>{
-                if(index === 0) setDone1(e.target.value);
-                if(index === 1) setDone2(e.target.value);
-                if(index === 2) setDone3(e.target.value);
-                if(index === 3) setDone4(e.target.value);
-              }}
-              className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>))}
+            placeholder='type here'
+             value={due1} 
+             onChange={(e)=>setDue1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
 
+           <div className='flex flex-col'>
+           <label htmlFor={done1}>Done</label>
+            <input type='text'
+            placeholder='type here'
+             value={done1} 
+             onChange={(e)=>setDone1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+           <div className='flex items-center justify-center mt-[25px]'>
+            <button type='button' onClick={handleAddMore} className=' w-[150px] bg-[#F9F9F9] px-4 py-2 border border-dashed border-[#293950] rounded-lg'>Add more</button>
+            </div>
 
-
-
-
-
-          <button
-            type="submit"
-            className="w-full py-2 text-white transition duration-300 bg-blue-600 rounded bg-blue hover:bg-blue-700"
-          >
-            Get Template
-          </button>
-        </form>
+          </div>       
+          </div>
+       
 
 
 
 {/* previews */}
 <br/>
 <br/>
-<h1 className="mb-6 text-2xl font-bold text-center">preview(template 4)</h1>
+<h1 className="mb-6 text-2xl font-bold text-center">Live preview(template 4)</h1>
 <br/>
 
    <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
@@ -849,37 +859,26 @@ const EditTemplate4 = () => {
               </thead>
               <tbody>
                 <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Kick off meeting</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Project introduction: Review project goals & objectives</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>In Person</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Once</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>project team sponser stakeholders</td>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting1 || "Kick off meeting"}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose1 || 'Project introduction: Review project goals & objectives'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium1 ||'In Person'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq1 || 'once'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud1 ||"project team sponser stakeholders"}</td>
                 </tr>
   
                 <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting1 ||  'N/A'}</td>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting2 ||  'N/A'}</td>
   
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose1 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium1||'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq1 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud1 ||  'N/A'}</td>
-  
-                </tr>
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting2 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose2 ||  'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium2  || 'N/A'}</td>
-  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose2 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium2||'N/A'}</td>
                 <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq2 || 'N/A'}</td>
                 <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud2 ||  'N/A'}</td>
-                </tr>
   
+                </tr>
   
                 <tr>
                 <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting3 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose3 ||   'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose3 ||  'N/A'}</td>
   
                 <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium3  || 'N/A'}</td>
   
@@ -887,14 +886,25 @@ const EditTemplate4 = () => {
                 <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud3 ||  'N/A'}</td>
                 </tr>
   
+  
                 <tr>
                 <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting4 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose4  || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose4 ||   'N/A'}</td>
   
                 <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium4  || 'N/A'}</td>
   
                 <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq4 || 'N/A'}</td>
                 <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud4 ||  'N/A'}</td>
+                </tr>
+  
+                <tr>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting5 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose5  || 'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium5  || 'N/A'}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq5 || 'N/A'}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud5 ||  'N/A'}</td>
                 </tr>
   
   
@@ -964,9 +974,20 @@ const EditTemplate4 = () => {
                   
             </table>
             </div>
+               
+          <button
+            type="submit"
+            className="w-full py-2 text-white transition duration-300 bg-blue-600 rounded bg-blue hover:bg-blue-700"
+          >
+            Get Template
+          </button>
+        </form>
 
       
       </div>
+
+
+      
    
 
 
