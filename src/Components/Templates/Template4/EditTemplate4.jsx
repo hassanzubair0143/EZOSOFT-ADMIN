@@ -15,7 +15,7 @@ const EditTemplate4 = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [buttonText, setButtonText] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('upload image');
   const [meetinggoals, setGoals] = useState('');
   const [meetinggoals2, setGoals2] = useState('');
   const [info1, setInfo1] = useState('');
@@ -38,6 +38,7 @@ const EditTemplate4 = () => {
   const [pDesc, setPdesc] = useState('');
   const [pdtext1,setDtext1] = useState('');
   const [pdtext2,setDtext2] = useState('');
+  const [pdtext3,setDtext3] = useState('');
   const [meeting1, setMeeting1] = useState('');
   const [meeting2, setMeeting2] = useState('');
   const [meeting3, setMeeting3] = useState('');
@@ -70,6 +71,8 @@ const EditTemplate4 = () => {
   const [done2,setDone2] = useState('');
   const [done3,setDone3] = useState('');
   const [done4,setDone4] = useState('');
+
+  const [fileName, setFileName] = useState(null);
   
   
   
@@ -79,6 +82,7 @@ const EditTemplate4 = () => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setFileName(file.name);
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result); // Save base64 image data
@@ -125,99 +129,200 @@ const EditTemplate4 = () => {
 }
 
   return (
-    <div className="flex py-10 bg-gray-100 full ">
-      <div className="w-full p-8 bg-white rounded-lg shadow-lg ">
-        <h1 className="mb-6 text-2xl font-bold text-center">Meeting Input Form</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
+   
+      <div className="w-full lg:py-[126px] lg:px-[167px] md:p-[50px] ">
+        <form onSubmit={handleSubmit} className="w-full border border-[#D9D9D9] rounded-lg">
+          <div className='bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] '>
+           <div className='flex flex-col md:flex-row w-full gap-[35px]'>
+           <div className='flex md:w-[50%] gap-[55px] items-center justify-center'>
+           <label htmlFor="title" className="w-[10%]">Title:</label>
             <input
               type="text"
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter Title"
             />
-          </div>
-          <div>
+           </div>
+
+           <div className="flex items-center justify-center sm:gap-[20px]">
+  <label htmlFor="image">Logo:</label>
+  <div
+    className="bg-[#F9F9F9] h-[40px] w-[140px] border border-dashed border-[#D9D9D9] flex items-center justify-center cursor-pointer rounded-lg"
+    onClick={() => document.getElementById('image').click()} // This triggers the file input click
+  >
+    <input
+      type="file"
+      id="image"
+      accept="image/*"
+      onChange={handleImageUpload}
+      className="hidden" // Hide the actual input element
+    />
+   {/* Text or icon inside the div */}
+  </div>
+  <span>{fileName}</span> 
+
+</div>
+
+           </div>
+            
+         
+          <div className=' mt-[25px] flex items-center justify-center gap-[20px]'>
             <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] resize-none rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter Description"
             ></textarea>
           </div>
-          
-          <div>
-            <label htmlFor="image" className="block text-sm font-medium text-gray-700">Upload Company Logo:</label>
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="px-4 py-2 ml-1 border border-gray-300 rounded"
-            />
           </div>
 
+           {/* project information */}
+           <h2 className='font-semibold ml-[60px] text-[20px] leading-[30px] font-[Poppins]'>Project Information</h2>
+           <div className='grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6 '>
+            
+           <div className='flex flex-col'>
+           <label htmlFor={pName}>Project Name</label>
+            <input type='text'
+             value={pName} 
+             onChange={(e)=>setPname(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9]  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pName}>Project Start date</label>
+            <input type='date'
+             value={pStartDate} 
+             onChange={(e)=>setStartdate(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border  border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pEndDate}>Project Estimated Completion</label>
+            <input type='date'
+             value={pEndDate} 
+             onChange={(e)=>setEnddate(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pBudget}>Project Budget</label>
+            <input type='text'
+             value={pBudget} 
+             onChange={(e)=>setPbudget(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pDesc}>Project Description</label>
+            <input type='text'
+             value={pDesc} 
+             onChange={(e)=>setPdesc (e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9]  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+          </div>
+
+
+
+           {/* project deliverable */}
+           <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Project Deliverables</h2>
+           <div className='grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
+            
+           
+            <input type='text'
+             value={pdtext1} 
+             onChange={(e)=>setDtext1(e.target.value)} 
+             placeholder='type here'
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+          
+
+           
+          
+            <input type='text'
+             value={pdtext2} 
+             placeholder='type here'
+             onChange={(e)=>setDtext2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+          
+
+           <input type='text'
+             value={pdtext3} 
+             placeholder='type here'
+             onChange={(e)=>setDtext3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+         
+          
+       
+
             {/* Meeting Information */}
-            <div className="flex flex-col">
-            <h2 className="mt-4 text-lg font-medium">Meeting Information</h2>
+            <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Project Information</h2>
+            <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+            
             {[info1, info2, info3].map((info, index) => (
-              <div className="flex items-center gap-4 mt-2" key={index}>
-                <label htmlFor={`info${index + 1}`} className="block text-sm font-medium text-gray-700">Information {index + 1}:</label>
+              
+
                 <input
+                key={index}
                   type="text"
                   id={`info${index + 1}`}
+                  placeholder='type here'
                   value={info}
                   onChange={(e) => {
                     if (index === 0) setInfo1(e.target.value);
                     if (index === 1) setInfo2(e.target.value);
                     if (index === 2) setInfo3(e.target.value);
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
+              
             ))}
           </div>
 
           {/* Meeting Goals */}
-          <div className="flex flex-col">
-            <h2 className="mt-4 text-lg font-medium">Meeting Goals</h2>
-            <div className="flex items-center gap-4 mt-2">
-              <label htmlFor="meetinggoals" className="block text-sm font-medium text-gray-700">Goal 1:</label>
+          <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Meeting Goals</h2>
+          <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+            
+            
+
               <input
                 type="text"
                 id="meetinggoals"
                 value={meetinggoals}
+                placeholder='type here'
                 onChange={(e) => setGoals(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            </div>
-            <div className="flex items-center gap-4 mt-2">
-              <label htmlFor="meetinggoals2" className="block text-sm font-medium text-gray-700">Goal 2:</label>
+            
+            
+              
               <input
                 type="text"
                 id="meetinggoals2"
+                placeholder='type here'
                 value={meetinggoals2}
                 onChange={(e) => setGoals2(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            </div>
+            
           </div>
 
         
 
           {/* Meeting Objectives */}
-          <div className="flex flex-col">
-            <h2 className="mt-4 text-lg font-medium">Meeting Objectives</h2>
+          <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Meeting Objectives</h2>
+          <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+           
             {[obj1, obj2, obj3, obj4].map((obj, index) => (
-              <div className="flex items-center gap-4 mt-2" key={index}>
-                <label htmlFor={`obj${index + 1}`} className="block text-sm font-medium text-gray-700">Objective {index + 1}:</label>
+            
+                
                 <input
+                key={index}
                   type="text"
+                  placeholder='type here'
                   id={`obj${index + 1}`}
                   value={obj}
                   onChange={(e) => {
@@ -226,20 +331,26 @@ const EditTemplate4 = () => {
                     if (index === 2) setObj3(e.target.value);
                     if (index === 3) setObj4(e.target.value);
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
+              
             ))}
           </div>
 
+
+
+          <div className='flex w-full'>
           {/* Constraints */}
-          <div className="flex flex-col">
-            <h2 className="mt-4 text-lg font-medium">Constraints</h2>
+          <div className='flex flex-col w-[50%]'>
+          <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Constraints</h2>
+          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6 ">
+            
             {[cons1, cons2, cons3].map((cons, index) => (
-              <div className="flex items-center gap-4 mt-2" key={index}>
-                <label htmlFor={`cons${index + 1}`} className="block text-sm font-medium text-gray-700">Value {index + 1}:</label>
+             
                 <input
                   type="text"
+                  key={index}
+                  placeholder='type here'
                   id={`cons${index + 1}`}
                   value={cons}
                   onChange={(e) => {
@@ -247,20 +358,25 @@ const EditTemplate4 = () => {
                     if (index === 1) setCons2(e.target.value);
                     if (index === 2) setCons3(e.target.value);
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-[80%] bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
+              
             ))}
+          </div>
           </div>
 
           {/* Assumptions */}
-          <div className="flex flex-col">
-            <h2 className="mt-4 text-lg font-medium">Assumptions</h2>
+          <div className='flex flex-col w-[50%]'>
+          <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Assumptions</h2>
+          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+            
             {[asumption1, asumption2, asumption3].map((asm, index) => (
-              <div className="flex items-center gap-4 mt-2" key={index}>
-                <label htmlFor={`asm${index + 1}`} className="block text-sm font-medium text-gray-700">Assumption {index + 1}:</label>
+            
+    
                 <input
+                key={index}
                   type="text"
+                  placeholder='type here'
                   id={`asm${index + 1}`}
                   value={asm}
                   onChange={(e) => {
@@ -268,120 +384,84 @@ const EditTemplate4 = () => {
                     if (index === 1) setAsm2(e.target.value);
                     if (index === 2) setAsm3(e.target.value);
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-[80%] bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
+              
             ))}
+          </div>
+          </div>
+
           </div>
 
           
-          {/* project information */}
-          <div>
-            <h2 className='font-bold'>Project Information</h2>
-           <div className='flex items-center gap-4'>
-           <label htmlFor={pName}>Project Name</label>
-            <input type='text'
-             value={pName} 
-             onChange={(e)=>setPname(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
+         
 
-           <div className='flex items-center gap-4'>
-           <label htmlFor={pName}>Project Start date</label>
-            <input type='date'
-             value={pStartDate} 
-             onChange={(e)=>setStartdate(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
-
-           <div className='flex items-center gap-4'>
-           <label htmlFor={pEndDate}>Project Estimated Completion</label>
-            <input type='date'
-             value={pEndDate} 
-             onChange={(e)=>setEnddate(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
-
-           <div className='flex items-center gap-4'>
-           <label htmlFor={pBudget}>Project Budget</label>
-            <input type='text'
-             value={pBudget} 
-             onChange={(e)=>setPbudget(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
-
-           <div className='flex items-center gap-4'>
-           <label htmlFor={pDesc}>Project Description</label>
-            <input type='text'
-             value={pDesc} 
-             onChange={(e)=>setPdesc (e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
-          </div>
-
-           {/* project deliverable */}
-           <div>
-            <h2 className='font-bold'>Project Deliverables</h2>
-           <div className='flex items-center gap-4'>
-           <label htmlFor={pdtext1}>Add text 1</label>
-            <input type='text'
-             value={pdtext1} 
-             onChange={(e)=>setDtext1(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
-
-           <div className='flex items-center gap-4'>
-           <label htmlFor={pdtext2}>Add text 2</label>
-            <input type='text'
-             value={pdtext2} 
-             onChange={(e)=>setDtext2(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
-          </div>
+          
 
 
  {/* Meeting Agenda */}
 
-          {/* meetings */}
-           <div>
-            <h2 className='font-bold'>Meetings</h2>
-           <div className='flex items-center gap-4'>
-           <label htmlFor={meeting1}>Meeting 1</label>
+          {/* meeting agenda */}
+          <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Meeting Agenda</h2>
+           
+           <div className='grid md:grid-cols-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
+            
+           <div className='flex flex-col'>
+           <label htmlFor={meeting1}>Meetings</label>
             <input type='text'
+            placeholder='type here'
              value={meeting1} 
              onChange={(e)=>setMeeting1(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
 
-           <div className='flex items-center gap-4'>
-           <label htmlFor={meeting2}>Meeting 2</label>
+           <div className='flex flex-col'>
+           <label htmlFor={purpose1}>Purpose</label>
             <input type='text'
-             value={meeting2} 
-             onChange={(e)=>setMeeting2(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+            placeholder='type here'
+             value={purpose1} 
+             onChange={(e)=>setPurpose1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
 
-           <div className='flex items-center gap-4'>
-           <label htmlFor={meeting3}>Meeting 3</label>
+           <div className='flex flex-col'>
+           <label htmlFor={medium1}>Medium</label>
             <input type='text'
-             value={meeting3} 
-             onChange={(e)=>setMeeting3(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+            placeholder='type here'
+             value={medium1} 
+             onChange={(e)=>setMedium1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
 
-           <div className='flex items-center gap-4'>
-           <label htmlFor={meeting4}>Meeting 4</label>
+           <div className='flex flex-col'>
+           <label htmlFor={freq1}>Frequency</label>
             <input type='text'
-             value={meeting4} 
-             onChange={(e)=>setMeeting4(e.target.value)} 
-             className='px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+            placeholder='type here'
+             value={freq1} 
+             onChange={(e)=>setFreq1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={aud1}>Audience</label>
+            <input type='text'
+            placeholder='type here'
+             value={aud1} 
+             onChange={(e)=>setAud1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+           
+            <div className='flex items-center justify-center'>
+            <button type='button' className='mt-[10px] w-[150px] bg-[#F9F9F9] px-4 py-2 border border-dashed border-[#D9D9D9] rounded-lg'>Add more</button>
+            </div>
+             
+  
            
           </div>
 
           {/* purpose */}
           <h2 className='font-bold'>Meeting Purpose</h2>
-          {[purpose1,purpose2,purpose3,purpose4].map((purpose,index)=>(<div key={index} className='flex gap-4'>
+          {[,purpose2,purpose3,purpose4].map((purpose,index)=>(<div key={index} className='flex gap-4'>
             <h2>purpose {index +1}</h2>
             <label htmlFor={`purpose${index+1}`}></label>
             <input type='text'
@@ -398,7 +478,8 @@ const EditTemplate4 = () => {
 
           {/* Medium */}
           <h2 className='font-bold'>Meeting Medium</h2>
-          {[medium1,medium2,medium3,medium4].map((medium,index)=>(<div key={index} className='flex gap-4'>
+          {[
+          medium2,medium3,medium4].map((medium,index)=>(<div key={index} className='flex gap-4'>
             <h2>Medium {index +1}</h2>
             <label htmlFor={`medium${index+1}`}></label>
             <input type='text'
@@ -415,7 +496,7 @@ const EditTemplate4 = () => {
 
            {/* Frequency */}
            <h2 className='font-bold'>Meeting Frequency</h2>
-          {[freq1,freq2,freq3,freq4].map((freq,index)=>(<div key={index} className='flex gap-4'>
+          {[,freq2,freq3,freq4].map((freq,index)=>(<div key={index} className='flex gap-4'>
             <h2>Frequency {index +1}</h2>
             <label htmlFor={`Frequency ${index+1}`}></label>
             <input type='text'
@@ -432,7 +513,7 @@ const EditTemplate4 = () => {
 
            {/* Aundience */}
            <h2 className='font-bold'>Meeting Audience</h2>
-          {[aud1,aud2,aud3,aud4].map((aud,index)=>(
+          {[,aud2,aud3,aud4].map((aud,index)=>(
             <div key={index} className='flex gap-4'>
             <h2>Audience {index +1}</h2>
             <label htmlFor={`aud ${index+1}`}></label>
@@ -519,13 +600,18 @@ const EditTemplate4 = () => {
             type="submit"
             className="w-full py-2 text-white transition duration-300 bg-blue-600 rounded bg-blue hover:bg-blue-700"
           >
-            Submit
+            Get Template
           </button>
         </form>
 
 
 
 {/* previews */}
+<br/>
+<br/>
+<h1 className="mb-6 text-2xl font-bold text-center">preview(template 4)</h1>
+<br/>
+
    <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
       <div className='w-full lg:px-[60px] xl:px-[60px] md:px-[30px] px-[15px] flex lg:flex-row xl:flex-row flex-col'>
         <div className='mt-[40px] lg:w-[50%] xl:w-[50%] w-[100%]'>
@@ -881,7 +967,7 @@ const EditTemplate4 = () => {
 
       
       </div>
-    </div>
+   
 
 
 

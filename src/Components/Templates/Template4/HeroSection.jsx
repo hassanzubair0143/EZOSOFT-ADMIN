@@ -28,6 +28,8 @@ const HeroSection = () => {
      aud1,aud2,aud3,aud4,
     } = location.state|| {}
 
+    
+
   return (
     <>
     <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
