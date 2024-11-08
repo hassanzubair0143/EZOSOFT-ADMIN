@@ -20,19 +20,19 @@ const HeroSection = () => {
      cons1,cons2,cons3,
      asumption1,asumption2,asumption3,
      pName, pStartDate, pEndDate, pBudget,pDesc,
-     pdtext1,pdtext2,
-     meeting1,meeting2,meeting3,meeting4,
-     purpose1,purpose2,purpose3,purpose4,
-     medium1,medium2,medium3,medium4,
-     freq1,freq2,freq3,freq4,
-     aud1,aud2,aud3,aud4,
+     pdtext1,pdtext2,pdtext3,
+     meeting1,meeting2,meeting3,meeting4,meeting5,
+     purpose1,purpose2,purpose3,purpose4,purpose5,
+     medium1,medium2,medium3,medium4,medium5,
+     freq1,freq2,freq3,freq4,freq5,
+     aud1,aud2,aud3,aud4,aud5,
     } = location.state|| {}
 
     
 
   return (
     <>
-    <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
+   <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
       <div className='w-full lg:px-[60px] xl:px-[60px] md:px-[30px] px-[15px] flex lg:flex-row xl:flex-row flex-col'>
         <div className='mt-[40px] lg:w-[50%] xl:w-[50%] w-[100%]'>
          <h2 className='text-[67px] leading-[81px] font-[Inter] text-white'>{title || 'One Pager Team Meeting Charter'}</h2>
@@ -63,7 +63,7 @@ const HeroSection = () => {
         <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green'>Project Information</h2>
         </div>
         <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
-        <div className='lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
+        <div className='min-h-[185px] lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
            <ul className='list-disc '>
       <li>
       <p className='text-[24px] font-[400] font-inter'>{info1 || 'information not given'}</p>
@@ -109,7 +109,7 @@ const HeroSection = () => {
         </div>
         <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
 {/* meeting objectives */}
-        <div className='lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
+        <div className='min-h-[200px] lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
            <ul className='list-disc '>
    <li>
       <p className='text-[24px] font-[400] font-[Inter]'>{obj1 || 'not given'}</p>
@@ -161,19 +161,19 @@ const HeroSection = () => {
         </div>
         <div className='mr-[35px] my-[20px] lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px] border border-lightClay'>
 
-        <div className='flex w-full border-b border-lightClay'>
-            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons1 || 'N/A'}</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption1 || 'N/A'}</p>
+        <div className='min-h-[80px] flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons1 || ''}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption1 || ''}</p>
             </div>
 
-            <div className='flex w-full border-b border-lightClay'>
-            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons2 || 'N/A'}</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption2 || 'N/A'}</p>
+            <div className='min-h-[80px] flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons2 || ''}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption2 || ''}</p>
             </div>
 
-            <div className='flex w-full border-b border-lightClay'>
-            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons3 || 'N/A'}</p>
-            <p className='w-[50%] border-l border-lightClay flex p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption3 || 'N/A'}</p>
+            <div className='min-h-[80px] flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons3 || ''}</p>
+            <p className='w-[50%] border-l border-lightClay flex p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption3 || ''}</p>
             </div>
             
         </div>
@@ -198,27 +198,27 @@ const HeroSection = () => {
      <div className='border border-lightClay w-[100%] mt-[16px]'>
      <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Name</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pName || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pName || ''}</p>
             </div>
 
             <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Start Date</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pStartDate||'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pStartDate||''}</p>
             </div>
 
             <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Estimated Completion</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pEndDate || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pEndDate || ''}</p>
             </div>
 
             <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Budget</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pBudget || "N/A"}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pBudget || ""}</p>
             </div>
 
             <div className='flex '>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Add Text Here</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pDesc  || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pDesc  || ''}</p>
 
             </div>
      </div>
@@ -234,9 +234,9 @@ const HeroSection = () => {
             
        <div className='w-full mt-[19px] border border-lightClay'>
        
-            <p className='border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Sponsor will provide required licenses & plugins</p> 
-            <p className='border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext1 || 'N/A'}</p> 
-            <p className=' p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext2 || 'N/A'}</p> 
+            <p className='min-h-[50px] border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext3 || ''}</p> 
+            <p className='min-h-[50px] border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext1 || ''}</p> 
+            <p className='min-h-[50px] p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext2 || ''}</p> 
           
        </div>
 
@@ -248,84 +248,84 @@ const HeroSection = () => {
 {/* meeting agenda table */}
 
 
-        <div className='w-full  lg:px-[65px] px-[20px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[1300px] translate-y-[1500px] overflow-x-auto'>
+<div className='w-full  lg:px-[65px] px-[20px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[1300px] translate-y-[1500px] overflow-x-auto'>
           
-        <div className='mt-[20px] flex  gap-2 '>
-        <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
-          <img src={MeetingAgenda} alt='project information'/>
-        </div>
-        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Meeting Agenda</h2>
-        </div>
-        <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
-
-          <table className='mt-[16px] max-w-[100%] w-full border border-lightClay'>
-            <thead className='bg-clay'>
-              <tr>
-                <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Meetings</th>
-                <th className='border-b border-r max-w-[30%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Purpose</th>
-                <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Medium</th>
-                <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Frequency</th>
-                <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Audience</th>
-
-              </tr>
-
-            </thead>
-            <tbody>
-              <tr>
-              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Kick off meeting</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Project introduction: Review project goals & objectives</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>In Person</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Once</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>project team sponser stakeholders</td>
-              </tr>
-
-              <tr>
-              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting1 ||  'N/A'}</td>
-
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose1 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium1||'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq1 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud1 ||  'N/A'}</td>
-
-              </tr>
-
-              <tr>
-              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting2 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose2 ||  'N/A'}</td>
-
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium2  || 'N/A'}</td>
-
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq2 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud2 ||  'N/A'}</td>
-              </tr>
-
-
-              <tr>
-              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting3 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose3 ||   'N/A'}</td>
-
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium3  || 'N/A'}</td>
-
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq3 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud3 ||  'N/A'}</td>
-              </tr>
-
-              <tr>
-              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting4 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose4  || 'N/A'}</td>
-
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium4  || 'N/A'}</td>
-
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq4 || 'N/A'}</td>
-              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud4 ||  'N/A'}</td>
-              </tr>
-
-
-            </tbody>
-              
+          <div className='mt-[20px] flex  gap-2 '>
+          <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+            <img src={MeetingAgenda} alt='project information'/>
+          </div>
+          <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Meeting Agenda</h2>
+          </div>
+          <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
+  
+            <table className='mt-[16px] max-w-[100%] w-full border border-lightClay'>
+              <thead className='bg-clay'>
+                <tr>
+                  <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Meetings</th>
+                  <th className='border-b border-r max-w-[30%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Purpose</th>
+                  <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Medium</th>
+                  <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Frequency</th>
+                  <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Audience</th>
+  
+                </tr>
+  
+              </thead>
+              <tbody>
+                <tr className='h-[50px]'>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting1 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose1 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium1 ||''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq1 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud1 || ''}</td>
+                </tr>
+  
+                <tr className='h-[50px]'>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting2 ||  ''}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose2 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium2||''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq2 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud2 ||  ''}</td>
+  
+                </tr>
+  
+                <tr className='h-[50px]'>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting3 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose3 ||  ''}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium3  || ''}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq3 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud3 ||  ''}</td>
+                </tr>
+  
+  
+                <tr className='h-[50px]'>
+                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting4 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose4 ||   ''}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium4  || ''}</td>
+  
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq4 || ''}</td>
+                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud4 ||  ''}</td>
+                </tr>
+  
+                <tr className='h-[50px]'>
+                <td className=' border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting5 || '' }</td>
+                <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose5  || ''}</td>
+  
+                <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium5  || ''}</td>
+  
+                <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq5 || ''}</td>
+                <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud5 ||  ''}</td>
+                </tr>
+  
+  
+              </tbody>
                 
-          </table>
-          </div>       
+                  
+            </table>
+            </div>       
     
     </>
   )

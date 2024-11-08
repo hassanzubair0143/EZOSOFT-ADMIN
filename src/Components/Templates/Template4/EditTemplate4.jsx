@@ -82,37 +82,53 @@ const EditTemplate4 = () => {
   const [done4,setDone4] = useState('');
 
   const [fileName, setFileName] = useState(null);
-  const [fields, setFields] = useState([{
-    meeting1: '',
-    purpose1: '',
-    medium1: '',
-    freq1: '',
-    aud1: ''
-  }]);
+  const [isSelected, setIsSelected] =useState(false);
 
-  const [clickCount, setClickCount] = useState(0);
-
+  const [milestones, setMilestones] = useState([
+    { milestone: '', status: '', due: '', done: '' },
+  ]);
   const handleAddMore = () => {
-    if (clickCount < 5) {
-      setFields([
-        ...fields,
-        {
-          meeting: '',
-          purpose: '',
-          medium: '',
-          freq: '',
-          aud: ''
-        }
-      ]);
-      setClickCount(clickCount + 1);
+    if (milestones.length < 5) {
+      setMilestones([...milestones, { milestone: '', status: '', due: '', done: '' }]);
     }
   };
+    // Handler to remove a specific milestone
+    const handleRemove = (index) => {
+      setMilestones(milestones.filter((_, i) => i !== index));
+    };
 
-  const handleChange = (e, index, field) => {
-    const updatedFields = [...fields];
-    updatedFields[index][field] = e.target.value;
-    setFields(updatedFields);
+  const handleInputChange = (index, field, value) => {
+    const newMilestones = [...milestones];
+    newMilestones[index][field] = value;
+    setMilestones(newMilestones);
   };
+
+  const [formData, setFormData] = useState({
+    pStatus1: '',
+    due1: '',
+    done1: '',
+    milestones: 'Define project goals' // Sample milestone; add fields as needed
+  });
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // Prepare milestone data with statuses
+  const milestoneData = [
+    { name: milestones[0]?.name || 'Project Initiation', status: pStatus1, due: due1, done: done1 },
+    { name: milestones[1]?.name || 'Current Business Process Analysis', status: pStatus2, due: due2, done: done2 },
+    { name: milestones[2]?.name || 'Project Presentation', status: pStatus3, due: due3, done: done3 },
+    { name: milestones[3]?.name || 'Add text Here', status: pStatus4, due: due4, done: done4 },
+  ];
+
+
+ 
+
   
   
   
@@ -121,6 +137,7 @@ const EditTemplate4 = () => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+    setIsSelected(isSelected)
     if (file) {
       setFileName(file.name);
       const reader = new FileReader();
@@ -137,13 +154,14 @@ const EditTemplate4 = () => {
     navigate('/template4', {
       state: {
         title, description, buttonText, image,
+        milestones,formData,
         meetinggoals, meetinggoals2,
         info1, info2, info3,
         obj1, obj2, obj3, obj4,
         cons1, cons2, cons3,
         asumption1, asumption2, asumption3,
         pName, pStartDate, pEndDate, pBudget,pDesc,
-        pdtext1,pdtext2,
+        pdtext1,pdtext2,pdtext3,
         meeting1,meeting2,meeting3,meeting4,
         purpose1,purpose2,purpose3,purpose4,
         medium1,medium2,medium3,medium4,
@@ -199,6 +217,7 @@ const EditTemplate4 = () => {
       onChange={handleImageUpload}
       className="hidden" // Hide the actual input element
     />
+    {isSelected?<span>uploaded </span>:<span>upload </span>} 
    {/* Text or icon inside the div */}
   </div>
   <span>{fileName}</span> 
@@ -381,9 +400,9 @@ const EditTemplate4 = () => {
 
           <div className='flex w-full'>
           {/* Constraints */}
-          <div className='flex flex-col w-[50%]'>
+          <div className='flex flex-col w-[100%]'>
           <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Constraints</h2>
-          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6 ">
+          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
             
             {[cons1, cons2, cons3].map((cons, index) => (
              
@@ -406,9 +425,9 @@ const EditTemplate4 = () => {
           </div>
 
           {/* Assumptions */}
-          <div className='flex flex-col w-[50%]'>
+          <div className='flex flex-col w-[100%]'>
           <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Assumptions</h2>
-          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6 ">
             
             {[asumption1, asumption2, asumption3].map((asm, index) => (
             
@@ -445,7 +464,7 @@ const EditTemplate4 = () => {
           <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Meeting Agenda</h2>
            
            <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
-            
+           <h2 className='font-[400] text-[20px] leading-[30px] font-[Poppins]'>Agenda 1</h2> 
           <div className='grid w-full gap-6 md:grid-cols-3'>
           <div className='flex flex-col'>
            <label htmlFor={meeting1}>Meetings</label>
@@ -493,7 +512,8 @@ const EditTemplate4 = () => {
            </div>
           </div>
 
-          <div className='grid w-full gap-6 md:grid-cols-3 mt-[30px]'>
+          <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 2</h2> 
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
           <div className='flex flex-col'>
            <label htmlFor={meeting2}>Meetings</label>
             <input type='text'
@@ -538,26 +558,166 @@ const EditTemplate4 = () => {
              onChange={(e)=>setAud2(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
-           <div className='flex items-center justify-center mt-[25px] '>
+           {/* <div className='flex items-center justify-center mt-[25px] '>
             <button type='button' onClick={handleAddMore} className='w-[150px] bg-[#F9F9F9] px-4 py-2 border border-dashed border-[#293950] rounded-lg'>Add more</button>
-            </div>
+            </div> */}
           
           </div>
 
-          
-          </div>
+
+          <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 3</h2> 
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
+          <div className='flex flex-col'>
+           <label htmlFor={meeting3}>Meetings</label>
+            <input type='text'
+            placeholder='type here'
+             value={meeting3} 
+             onChange={(e)=>setMeeting3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={purpose3}>Purpose</label>
+            <input type='text'
+            placeholder='type here'
+             value={purpose3} 
+             onChange={(e)=>setPurpose3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={medium3}>Medium</label>
+            <input type='text'
+            placeholder='type here'
+             value={medium3} 
+             onChange={(e)=>setMedium3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={freq3}>Frequency</label>
+            <input type='text'
+            placeholder='type here'
+             value={freq3} 
+             onChange={(e)=>setFreq3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={aud3}>Audience</label>
+            <input type='text'
+            placeholder='type here'
+             value={aud3} 
+             onChange={(e)=>setAud3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
          
           
-
-          {/*
-            <label htmlFor={`purpose${index+1}`}></label>
+          </div>
+             
+          <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 4</h2>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
+          <div className='flex flex-col'>
+           <label htmlFor={meeting4}>Meetings</label>
             <input type='text'
-              value={purpose}
-              onChange={(e)=>{
-                if(index === 0) setPurpose1(e.target.value);
-                if(index === 1) setPurpose2(e.target.value);
-                if(index === 2) setPurpose3(e.target.value);
-                if(index === 3) setPurpose4(e.target.value); */}
+            placeholder='type here'
+             value={meeting4} 
+             onChange={(e)=>setMeeting4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={purpose4}>Purpose</label>
+            <input type='text'
+            placeholder='type here'
+             value={purpose4} 
+             onChange={(e)=>setPurpose4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={medium4}>Medium</label>
+            <input type='text'
+            placeholder='type here'
+             value={medium4} 
+             onChange={(e)=>setMedium4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={freq4}>Frequency</label>
+            <input type='text'
+            placeholder='type here'
+             value={freq4} 
+             onChange={(e)=>setFreq4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={aud4}>Audience</label>
+            <input type='text'
+            placeholder='type here'
+             value={aud4} 
+             onChange={(e)=>setAud4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+          
+          
+          </div>
+          
+          <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 5</h2>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
+          <div className='flex flex-col'>
+           <label htmlFor={meeting5}>Meetings</label>
+            <input type='text'
+            placeholder='type here'
+             value={meeting5} 
+             onChange={(e)=>setMeeting5(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={purpose5}>Purpose</label>
+            <input type='text'
+            placeholder='type here'
+             value={purpose5} 
+             onChange={(e)=>setPurpose5(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={medium5}>Medium</label>
+            <input type='text'
+            placeholder='type here'
+             value={medium5} 
+             onChange={(e)=>setMedium5(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={freq5}>Frequency</label>
+            <input type='text'
+            placeholder='type here'
+             value={freq5} 
+             onChange={(e)=>setFreq5(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={aud5}>Audience</label>
+            <input type='text'
+            placeholder='type here'
+             value={aud5} 
+             onChange={(e)=>setAud5(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+          
+          
+          </div>
+
+          
+          </div>
+        
       
           {/* project status */}
           
@@ -565,53 +725,74 @@ const EditTemplate4 = () => {
            
            <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
             
-          <div className='grid w-full gap-6 md:grid-cols-3'>
-          <div className='flex flex-col'>
-           <label htmlFor={milestone1}>Milestones</label>
-            <input type='text'
-            placeholder='type here'
-             value={milestone1} 
-             onChange={(e)=>setMilestone1(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
+          
+          
 
-           <div className='flex flex-col'>
-           <label htmlFor={pStatus1}>Status</label>
-            <select
-             value={pStatus1} 
-             onChange={(e)=>setpStatus1(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
-               <option value= "">select status </option>
-                 <option value="Not Started">Not Started</option>
-                 <option value="Completed">Completed</option>
-                 <option value="Pending">Pending</option>
-                 <option value="In Progress">In Progress</option>
-             </select>
-           </div>
+          {milestones.map((milestone, index) => (
+          <div key={index} className="grid w-full gap-6 mb-4 md:grid-cols-3">
+            <div className="flex flex-col w-full">
+              <label>Milestone</label>
+              <input
+                type="text"
+                placeholder="type here"
+                value={milestone.milestone}
+                onChange={(e) => handleInputChange(index, 'milestone', e.target.value)}
+                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
 
-           <div className='flex flex-col'>
-           <label htmlFor={due1}>Due</label>
-            <input type='text'
-            placeholder='type here'
-             value={due1} 
-             onChange={(e)=>setDue1(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
+            <div className="flex flex-col">
+              <label>Status</label>
+              <select
+                value={milestone.status}
+                onChange={(e) => handleInputChange(index, 'status', e.target.value)}
+                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Select status</option>
+                <option value="Not Started">Not Started</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+              </select>
+            </div>
 
-           <div className='flex flex-col'>
-           <label htmlFor={done1}>Done</label>
-            <input type='text'
-            placeholder='type here'
-             value={done1} 
-             onChange={(e)=>setDone1(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
-           </div>
+            <div className="flex flex-col">
+              <label>Due</label>
+              <input
+                type="date"
+                value={milestone.due}
+                onChange={(e) => handleInputChange(index, 'due', e.target.value)}
+                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label>Done</label>
+              <input
+                type="text"
+                placeholder="type here"
+                value={milestone.done}
+                onChange={(e) => handleInputChange(index, 'done', e.target.value)}
+                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            {index > 0 && (
+            <button
+              type="button"
+              onClick={() => handleRemove(index)}
+              className="w-[150px] px-4 py-2 mt-4 text-red-500 border border-red-500 rounded-lg"
+            >
+              Remove
+            </button>
+          )}
+          </div>
+        ))}
            <div className='flex items-center justify-center mt-[25px]'>
             <button type='button' onClick={handleAddMore} className=' w-[150px] bg-[#F9F9F9] px-4 py-2 border border-dashed border-[#293950] rounded-lg'>Add more</button>
             </div>
 
           </div>       
-          </div>
+          
        
 
 
@@ -622,7 +803,7 @@ const EditTemplate4 = () => {
 <h1 className="mb-6 text-2xl font-bold text-center">Live preview(template 4)</h1>
 <br/>
 
-   <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
+<div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
       <div className='w-full lg:px-[60px] xl:px-[60px] md:px-[30px] px-[15px] flex lg:flex-row xl:flex-row flex-col'>
         <div className='mt-[40px] lg:w-[50%] xl:w-[50%] w-[100%]'>
          <h2 className='text-[67px] leading-[81px] font-[Inter] text-white'>{title || 'One Pager Team Meeting Charter'}</h2>
@@ -653,7 +834,7 @@ const EditTemplate4 = () => {
         <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green'>Project Information</h2>
         </div>
         <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
-        <div className='lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
+        <div className='min-h-[185px] lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
            <ul className='list-disc '>
       <li>
       <p className='text-[24px] font-[400] font-inter'>{info1 || 'information not given'}</p>
@@ -699,7 +880,7 @@ const EditTemplate4 = () => {
         </div>
         <div className='border-t border-green max-w-[393px] ml-[38px] -translate-y-[1px] rounded-l'></div>
 {/* meeting objectives */}
-        <div className='lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
+        <div className='min-h-[200px] lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px]  mt-[18px] pl-[30px] border border-lightClay max-w-[80%] w-full'>
            <ul className='list-disc '>
    <li>
       <p className='text-[24px] font-[400] font-[Inter]'>{obj1 || 'not given'}</p>
@@ -751,19 +932,19 @@ const EditTemplate4 = () => {
         </div>
         <div className='mr-[35px] my-[20px] lg:ml-[65px] xl:ml-[65px] md:ml-[30px] ml-[10px] border border-lightClay'>
 
-        <div className='flex w-full border-b border-lightClay'>
-            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons1 || 'N/A'}</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption1 || 'N/A'}</p>
+        <div className='min-h-[80px] flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons1 || ''}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption1 || ''}</p>
             </div>
 
-            <div className='flex w-full border-b border-lightClay'>
-            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons2 || 'N/A'}</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption2 || 'N/A'}</p>
+            <div className='min-h-[80px] flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons2 || ''}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption2 || ''}</p>
             </div>
 
-            <div className='flex w-full border-b border-lightClay'>
-            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons3 || 'N/A'}</p>
-            <p className='w-[50%] border-l border-lightClay flex p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption3 || 'N/A'}</p>
+            <div className='min-h-[80px] flex w-full border-b border-lightClay'>
+            <p className='w-[50%] p-[24px] text-[22px] font-[Inter] font-[400]'>{cons3 || ''}</p>
+            <p className='w-[50%] border-l border-lightClay flex p-[10px] text-[22px] font-[Inter] font-[400]'>{asumption3 || ''}</p>
             </div>
             
         </div>
@@ -788,27 +969,27 @@ const EditTemplate4 = () => {
      <div className='border border-lightClay w-[100%] mt-[16px]'>
      <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Name</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pName || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pName || ''}</p>
             </div>
 
             <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Start Date</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pStartDate||'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pStartDate||''}</p>
             </div>
 
             <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Estimated Completion</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pEndDate || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pEndDate || ''}</p>
             </div>
 
             <div className='flex border-b border-lightClay'>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Project Budget</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pBudget || "N/A"}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pBudget || ""}</p>
             </div>
 
             <div className='flex '>
             <p className='w-[50%] p-[10px] text-[20px] font-[Inter] font-[400]'>Add Text Here</p>
-            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pDesc  || 'N/A'}</p>
+            <p className='w-[50%] border-l border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pDesc  || ''}</p>
 
             </div>
      </div>
@@ -824,157 +1005,138 @@ const EditTemplate4 = () => {
             
        <div className='w-full mt-[19px] border border-lightClay'>
        
-            <p className='border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Sponsor will provide required licenses & plugins</p> 
-            <p className='border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext1 || 'N/A'}</p> 
-            <p className=' p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext2 || 'N/A'}</p> 
+            <p className='min-h-[50px] border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext3 || ''}</p> 
+            <p className='min-h-[50px] border-b  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext1 || ''}</p> 
+            <p className='min-h-[50px] p-[10px] text-[20px] font-[Inter] font-[400]'>{pdtext2 || ''}</p> 
           
        </div>
 
         </div>
 
+
+
+
 {/* meeting agenda table */}
 
 
-   <div className='w-full  lg:px-[65px] px-[20px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[1300px] translate-y-[1500px] overflow-x-auto'>
+        <div className='w-full  lg:px-[65px] px-[20px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[1300px] translate-y-[1500px] overflow-x-auto'>
           
-          <div className='mt-[20px] flex  gap-2 '>
-          <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
-            <img src={MeetingAgenda} alt='project information'/>
-          </div>
-          <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Meeting Agenda</h2>
-          </div>
-          <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
-  
-            <table className='mt-[16px] max-w-[100%] w-full border border-lightClay'>
-              <thead className='bg-clay'>
-                <tr>
-                  <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Meetings</th>
-                  <th className='border-b border-r max-w-[30%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Purpose</th>
-                  <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Medium</th>
-                  <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Frequency</th>
-                  <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Audience</th>
-  
-                </tr>
-  
-              </thead>
-              <tbody>
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting1 || "Kick off meeting"}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose1 || 'Project introduction: Review project goals & objectives'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium1 ||'In Person'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq1 || 'once'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud1 ||"project team sponser stakeholders"}</td>
-                </tr>
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting2 ||  'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose2 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium2||'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq2 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud2 ||  'N/A'}</td>
-  
-                </tr>
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting3 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose3 ||  'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium3  || 'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq3 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud3 ||  'N/A'}</td>
-                </tr>
-  
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting4 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose4 ||   'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium4  || 'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq4 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud4 ||  'N/A'}</td>
-                </tr>
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting5 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose5  || 'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium5  || 'N/A'}</td>
-  
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq5 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud5 ||  'N/A'}</td>
-                </tr>
-  
-  
-              </tbody>
-                
-                  
-            </table>
-            </div>       
-{/* project status */}
+        <div className='mt-[20px] flex  gap-2 '>
+        <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
+          <img src={MeetingAgenda} alt='project information'/>
+        </div>
+        <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Meeting Agenda</h2>
+        </div>
+        <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
 
-<div className='w-full  lg:px-[65px] px-[20px] pb-[50px] xl:translate-y-0 lg:translate-y-0 md:translate-y-[1300px] translate-y-[1500px] overflow-x-auto'>
+          <table className='mt-[16px] max-w-[100%] w-full border border-lightClay'>
+            <thead className='bg-clay'>
+              <tr>
+                <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Meetings</th>
+                <th className='border-b border-r max-w-[30%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Purpose</th>
+                <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Medium</th>
+                <th className='border-b border-r max-w-[15%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Frequency</th>
+                <th className='border-b border-r max-w-[20%]  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Audience</th>
+
+              </tr>
+
+            </thead>
+            <tbody>
+              <tr className='h-[50px]'>
+              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting1 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose1 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium1 ||''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq1 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud1 || ''}</td>
+              </tr>
+
+              <tr className='h-[50px]'>
+              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting2 ||  ''}</td>
+
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose2 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium2||''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq2 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud2 ||  ''}</td>
+
+              </tr>
+
+              <tr className='h-[50px]'>
+              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting3 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose3 ||  ''}</td>
+
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium3  || ''}</td>
+
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq3 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud3 ||  ''}</td>
+              </tr>
+
+
+              <tr className='h-[50px]'>
+              <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting4 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose4 ||   ''}</td>
+
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium4  || ''}</td>
+
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq4 || ''}</td>
+              <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud4 ||  ''}</td>
+              </tr>
+
+              <tr className='h-[50px]'>
+              <td className=' border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{meeting5 || '' }</td>
+              <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{purpose5  || ''}</td>
+
+              <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{medium5  || ''}</td>
+
+              <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{freq5 || ''}</td>
+              <td className=' text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{aud5 ||  ''}</td>
+              </tr>
+
+
+            </tbody>
+              
+                
+          </table>
+          </div> 
           
-          <div className='mt-[20px] flex  gap-2 '>
-          <div className='-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border  border-green bg-white rounded-full'>
-            <img src={ProjectStatusIcon} alt='project information'/>
-          </div>
-          <h2 className=' font-[Inter] font-[700] text-[30px] leading-[36px] text-green '>Project Status</h2>
-          </div>
-          <div className='border-t border-green max-w-[393px] -translate-y-[1px] rounded-l'></div>
-  
-            <table className='mt-[16px] max-w-[100%] w-full border border-lightClay'>
-              <thead className='bg-clay'>
-                <tr>
-                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Milestones</th>
-                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>status</th>
-                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Due</th>
-                  <th className='border-b border-r max-w-[25%] w-full  border-lightClay p-[10px] text-[25px] font-[Inter] font-[600]'>Done</th>
-  
-                </tr>
-  
-              </thead>
-              <tbody>
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Requirement Gathering</td>
-                <td className={`${getStatus(`${pStatus1}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus1 ||  'N/A'}</td>
 
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due1 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done1 || 'N/A'}</td>
-                </tr>
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Current Business Process Analysis</td>
-                <td className={`${getStatus(`${pStatus2}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus2 ||  'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due2 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done2 || 'N/A'}</td>
-                </tr>
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Project Presentation</td>
-                <td className={`${getStatus(`${pStatus3}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus3 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due3 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done3 || 'N/A'}</td>
-                </tr>
-  
-  
-                <tr>
-                <td className='border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>Add text Here</td>
-                <td className={`${getStatus(`${pStatus4}`)} text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]`}>{pStatus4 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{due4 || 'N/A'}</td>
-                <td className='text-center border-b border-r  border-lightClay p-[10px] text-[20px] font-[Inter] font-[400]'>{done4 || 'N/A'}</td>
-                </tr>
-  
-  
-  
-              </tbody>
-                
-                  
-            </table>
-            </div>
-               
+          <div className="w-full lg:px-[65px] px-[20px] pb-[50px] overflow-x-auto">
+        <div className="mt-[20px] flex gap-2">
+          <div className="-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border border-green bg-white rounded-full">
+            <img src={ProjectStatusIcon} alt="project information" />
+          </div>
+          <h2 className="font-[Inter] font-[700] text-[30px] leading-[36px] text-green">Project Status</h2>
+        </div>
+        <div className="border-t border-green max-w-[393px] -translate-y-[1px] rounded-l"></div>
+
+        <table className="mt-[16px] w-full border border-lightClay">
+          <thead className="bg-clay">
+            <tr>
+              <th className="border-b border-r p-[10px] text-[25px] font-[Inter] font-[600]">Milestones</th>
+              <th className="border-b border-r p-[10px] text-[25px] font-[Inter] font-[600]">Status</th>
+              <th className="border-b border-r p-[10px] text-[25px] font-[Inter] font-[600]">Due</th>
+              <th className="border-b border-r p-[10px] text-[25px] font-[Inter] font-[600]">Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            {milestoneData.map((milestone, index) => (
+              <tr key={index}>
+                <td className="border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.name}</td>
+                <td className={`${getStatus(milestone.status)} text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]`}>
+                  {milestone.status || 'N/A'}
+                </td>
+                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.due || 'N/A'}</td>
+                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.done || 'N/A'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+          
+
+     
+
+              <br/> 
           <button
             type="submit"
             className="w-full py-2 text-white transition duration-300 bg-blue-600 rounded bg-blue hover:bg-blue-700"
@@ -986,13 +1148,6 @@ const EditTemplate4 = () => {
       
       </div>
 
-
-      
-   
-
-
-
-  // preview
     
   );
 };
