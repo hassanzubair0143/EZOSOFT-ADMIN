@@ -54,10 +54,10 @@ const ProjectStatus = () => {
               <tr key={index}>
                 <td className="border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.name}</td>
                 <td className={`${getStatus(milestone.status)} text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]`}>
-                  {milestone.status || 'N/A'}
+                  {milestone.status || ''}
                 </td>
-                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.due || 'N/A'}</td>
-                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.done || 'N/A'}</td>
+                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.due || ''}</td>
+                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.done || ''}</td>
               </tr>
             ))}
           </tbody>

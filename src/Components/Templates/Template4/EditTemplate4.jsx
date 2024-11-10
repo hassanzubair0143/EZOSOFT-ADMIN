@@ -136,10 +136,10 @@ const EditTemplate4 = () => {
 
   // Prepare milestone data with statuses
   const milestoneData = [
-    { name: milestones[0]?.milestone || 'Project Initiation', status: pStatus1, due: due1, done: done1 },
-    { name: milestones[1]?.milestone || 'Current Business Process Analysis', status: pStatus2, due: due2, done: done2 },
-    { name: milestones[2]?.milestone || 'Project Presentation', status: pStatus3, due: due3, done: done3 },
-    { name: milestones[3]?.milestone || 'Add text Here', status: pStatus4, due: due4, done: done4 },
+    { name: milestones[0]?.milestone || '', status: pStatus1, due: due1, done: done1 },
+    { name: milestones[1]?.milestone || '', status: pStatus2, due: due2, done: done2 },
+    { name: milestones[2]?.milestone || '', status: pStatus3, due: due3, done: done3 },
+    { name: milestones[3]?.milestone || '', status: pStatus4, due: due4, done: done4 },
   ];
 
 
@@ -1264,10 +1264,10 @@ const EditTemplate4 = () => {
               <tr key={index}>
                 <td className="border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.name}</td>
                 <td className={`${getStatus(milestone.status)} text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]`}>
-                  {milestone.status || 'N/A'}
+                  {milestone.status || ''}
                 </td>
-                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.due || 'N/A'}</td>
-                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.done || 'N/A'}</td>
+                <td className="h-[50px] text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.due || ''}</td>
+                <td className="h-[50px] text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.done || ''}</td>
               </tr>
             ))}
           </tbody>
