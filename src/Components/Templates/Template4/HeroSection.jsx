@@ -35,8 +35,9 @@ const HeroSection = () => {
    <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
       <div className='w-full lg:px-[60px] xl:px-[60px] md:px-[30px] px-[15px] flex lg:flex-row xl:flex-row flex-col'>
         <div className='mt-[40px] lg:w-[50%] xl:w-[50%] w-[100%]'>
-         <h2 className='text-[67px] leading-[81px] font-[Inter] text-white'>{title || 'One Pager Team Meeting Charter'}</h2>
-         <p className='mt-[33px] text-[22px] text-white'>{description || 'This one pager covers meeting charter summarizing project goals & objectives.It also includes elements such as project status, deliverables, constraints assumptions,team members, stakeholders and project milestones, etc'}</p>
+         <h2 className='text-[67px] h-[180px] overflow-hidden leading-[81px] font-[Inter] text-white'>{title || 'One Pager Team Meeting Charter'}</h2>
+         <p className='mt-[33px] h-[140px] overflow-hidden text-[22px] text-white'>{description || ''}</p>
+        
          
          <div className=' mt-[38px] w-[333px] h-[56px] max-w-[350px] w-full bg-clay text-green flex items-center justify-center'>
          {image ? (
@@ -325,7 +326,7 @@ const HeroSection = () => {
                 
                   
             </table>
-            </div>       
+            </div>      
     
     </>
   )

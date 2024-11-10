@@ -31,7 +31,7 @@ const ProjectStatus = () => {
 
   return (
     <>
-      <div className="w-full lg:px-[65px] px-[20px] pb-[50px] overflow-x-auto">
+       <div className="w-full lg:px-[65px] px-[20px] pb-[50px] overflow-x-auto">
         <div className="mt-[20px] flex gap-2">
           <div className="-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border border-green bg-white rounded-full">
             <img src={ProjectStatusIcon} alt="project information" />

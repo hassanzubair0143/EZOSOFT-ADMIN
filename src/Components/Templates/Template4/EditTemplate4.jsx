@@ -1,5 +1,5 @@
 import { Pending } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProjectInfo from '/src/assets/images/project-information-logo.svg'
 import MeetingGoal from '/src/assets/images/Meeting.svg'
@@ -83,6 +83,22 @@ const EditTemplate4 = () => {
 
   const [fileName, setFileName] = useState(null);
   const [isSelected, setIsSelected] =useState(false);
+  const [text, setText] = useState('');
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const characterCount = text.length;
+    if (characterCount > 180) {
+      setError('Maximum characters are 180');
+    } else {
+      setError(null);
+    }
+  }, [text]);
+
+  const handleChange1 = (event) => {
+    setText(event.target.value);
+    setDescription(event.target.value)
+  };
 
   const [milestones, setMilestones] = useState([
     { milestone: '', status: '', due: '', done: '' },
@@ -120,10 +136,10 @@ const EditTemplate4 = () => {
 
   // Prepare milestone data with statuses
   const milestoneData = [
-    { name: milestones[0]?.name || 'Project Initiation', status: pStatus1, due: due1, done: done1 },
-    { name: milestones[1]?.name || 'Current Business Process Analysis', status: pStatus2, due: due2, done: done2 },
-    { name: milestones[2]?.name || 'Project Presentation', status: pStatus3, due: due3, done: done3 },
-    { name: milestones[3]?.name || 'Add text Here', status: pStatus4, due: due4, done: done4 },
+    { name: milestones[0]?.milestone || 'Project Initiation', status: pStatus1, due: due1, done: done1 },
+    { name: milestones[1]?.milestone || 'Current Business Process Analysis', status: pStatus2, due: due2, done: done2 },
+    { name: milestones[2]?.milestone || 'Project Presentation', status: pStatus3, due: due3, done: done3 },
+    { name: milestones[3]?.milestone || 'Add text Here', status: pStatus4, due: due4, done: done4 },
   ];
 
 
@@ -204,7 +220,7 @@ const EditTemplate4 = () => {
             />
            </div>
 
-           <div className="flex items-center justify-center sm:gap-[20px]">
+           <div className="flex items-center justify-center gap-[30px] sm:gap-[20px]">
   <label htmlFor="image">Logo:</label>
   <div
     className="bg-[#F9F9F9] h-[40px] w-[140px] border border-dashed border-[#293950] flex items-center justify-center cursor-pointer rounded-lg"
@@ -229,19 +245,26 @@ const EditTemplate4 = () => {
          
           <div className=' mt-[25px] flex items-center justify-center gap-[20px]'>
             <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
-            <textarea
+           <div className='flex flex-col w-full'>
+           <textarea
               id="description"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={handleChange1}
               className="w-full bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] resize-none rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter Description"
             ></textarea>
+                 {error && (
+                  <p className='text-red-400 mt-[4px] ml-[30px]'>{error}</p>
+                  )}
+
+           </div>
+
           </div>
           </div>
 
            {/* project information */}
            <h2 className='font-semibold ml-[60px] text-[20px] leading-[30px] font-[Poppins]'>Project Information</h2>
-           <div className='grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6 '>
+           <div className='grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6 '>
             
            <div className='flex flex-col'>
            <label htmlFor={pName}>Project Name</label>
@@ -288,7 +311,7 @@ const EditTemplate4 = () => {
 
            {/* project deliverable */}
            <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Project Deliverables</h2>
-           <div className='grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
+           <div className='grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6'>
             
            
             <input type='text'
@@ -319,7 +342,7 @@ const EditTemplate4 = () => {
 
             {/* Meeting Information */}
             <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Project Information</h2>
-            <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+            <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6">
             
             {[info1, info2, info3].map((info, index) => (
               
@@ -343,7 +366,7 @@ const EditTemplate4 = () => {
 
           {/* Meeting Goals */}
           <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Meeting Goals</h2>
-          <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+          <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6">
             
             
 
@@ -373,7 +396,7 @@ const EditTemplate4 = () => {
 
           {/* Meeting Objectives */}
           <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Meeting Objectives</h2>
-          <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+          <div className="grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6">
            
             {[obj1, obj2, obj3, obj4].map((obj, index) => (
             
@@ -398,11 +421,11 @@ const EditTemplate4 = () => {
 
 
 
-          <div className='flex w-full'>
+          <div className='flex flex-col w-full sm:flex-row'>
           {/* Constraints */}
           <div className='flex flex-col w-[100%]'>
           <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Constraints</h2>
-          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6">
+          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6">
             
             {[cons1, cons2, cons3].map((cons, index) => (
              
@@ -427,7 +450,7 @@ const EditTemplate4 = () => {
           {/* Assumptions */}
           <div className='flex flex-col w-[100%]'>
           <h2 className="font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]">Assumptions</h2>
-          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6 ">
+          <div className="grid md:grid-rows-3  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6 ">
             
             {[asumption1, asumption2, asumption3].map((asm, index) => (
             
@@ -463,7 +486,7 @@ const EditTemplate4 = () => {
           {/* meeting agenda */}
           <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Meeting Agenda</h2>
            
-           <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
+           <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6'>
            <h2 className='font-[400] text-[20px] leading-[30px] font-[Poppins]'>Agenda 1</h2> 
           <div className='grid w-full gap-6 md:grid-cols-3'>
           <div className='flex flex-col'>
@@ -723,75 +746,193 @@ const EditTemplate4 = () => {
           
           <h2 className='font-semibold ml-[60px] mt-[30px] text-[20px] leading-[30px] font-[Poppins]'>Project Status</h2>
            
-           <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg mx-[60px] p-[35px] gap-6'>
-            
-          
-          
+          <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6'>
+           <h2 className='font-[400] text-[20px] leading-[30px] font-[Poppins]'>Status 1</h2> 
+          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='flex flex-col'>
+           <label htmlFor={milestone1}>Milestones</label>
+            <input type='text'
+            placeholder='type here'
+             value={milestone1} 
+             onChange={(e)=>setMilestone1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
 
-          {milestones.map((milestone, index) => (
-          <div key={index} className="grid w-full gap-6 mb-4 md:grid-cols-3">
-            <div className="flex flex-col w-full">
-              <label>Milestone</label>
-              <input
-                type="text"
-                placeholder="type here"
-                value={milestone.milestone}
-                onChange={(e) => handleInputChange(index, 'milestone', e.target.value)}
-                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label>Status</label>
-              <select
-                value={milestone.status}
-                onChange={(e) => handleInputChange(index, 'status', e.target.value)}
-                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Select status</option>
+           <div className='flex flex-col'>
+           <label htmlFor={pStatus1}>Status</label>
+            <select 
+           
+             value={pStatus1} 
+             onChange={(e)=>setpStatus1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
+               <option value="">Select status</option>
                 <option value="Not Started">Not Started</option>
                 <option value="Completed">Completed</option>
                 <option value="Pending">Pending</option>
                 <option value="In Progress">In Progress</option>
-              </select>
-            </div>
+             </select>
+           </div>
 
-            <div className="flex flex-col">
-              <label>Due</label>
-              <input
-                type="date"
-                value={milestone.due}
-                onChange={(e) => handleInputChange(index, 'due', e.target.value)}
-                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+           <div className='flex flex-col'>
+           <label htmlFor={due1}>Due</label>
+            <input type='text'
+            placeholder='type here'
+             value={due1} 
+             onChange={(e)=>setDue1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
 
-            <div className="flex flex-col">
-              <label>Done</label>
-              <input
-                type="text"
-                placeholder="type here"
-                value={milestone.done}
-                onChange={(e) => handleInputChange(index, 'done', e.target.value)}
-                className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            {index > 0 && (
-            <button
-              type="button"
-              onClick={() => handleRemove(index)}
-              className="w-[150px] px-4 py-2 mt-4 text-red-500 border border-red-500 rounded-lg"
-            >
-              Remove
-            </button>
-          )}
+           <div className='flex flex-col'>
+           <label htmlFor={done1}>Done</label>
+            <input type='text'
+            placeholder='type here'
+             value={done1} 
+             onChange={(e)=>setDone1(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
           </div>
-        ))}
-           <div className='flex items-center justify-center mt-[25px]'>
-            <button type='button' onClick={handleAddMore} className=' w-[150px] bg-[#F9F9F9] px-4 py-2 border border-dashed border-[#293950] rounded-lg'>Add more</button>
-            </div>
 
-          </div>       
+          <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Status 2</h2> 
+          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='flex flex-col'>
+           <label htmlFor={milestone2}>Milestones</label>
+            <input type='text'
+            placeholder='type here'
+             value={milestone2} 
+             onChange={(e)=>setMilestone2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pStatus2}>Status</label>
+            <select 
+           
+             value={pStatus2} 
+             onChange={(e)=>setpStatus2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
+               <option value="">Select status</option>
+                <option value="Not Started">Not Started</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+             </select>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={due2}>Due</label>
+            <input type='text'
+            placeholder='type here'
+             value={due2} 
+             onChange={(e)=>setDue2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={done2}>Done</label>
+            <input type='text'
+            placeholder='type here'
+             value={done2} 
+             onChange={(e)=>setDone2(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+          </div>
+
+
+          <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Status 3</h2> 
+          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='flex flex-col'>
+           <label htmlFor={milestone3}>Milestones</label>
+            <input type='text'
+            placeholder='type here'
+             value={milestone3} 
+             onChange={(e)=>setMilestone3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pStatus3}>Status</label>
+            <select 
+           
+             value={pStatus3} 
+             onChange={(e)=>setpStatus3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
+               <option value="">Select status</option>
+                <option value="Not Started">Not Started</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+             </select>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={due3}>Due</label>
+            <input type='text'
+            placeholder='type here'
+             value={due1} 
+             onChange={(e)=>setDue3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={done3}>Done</label>
+            <input type='text'
+            placeholder='type here'
+             value={done3} 
+             onChange={(e)=>setDone3(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+          </div>
+             
+          <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Status 4</h2>
+         
+          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='flex flex-col'>
+           <label htmlFor={milestone4}>Milestones</label>
+            <input type='text'
+            placeholder='type here'
+             value={milestone4} 
+             onChange={(e)=>setMilestone4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={pStatus4}>Status</label>
+            <select 
+           
+             value={pStatus4} 
+             onChange={(e)=>setpStatus4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
+               <option value="">Select status</option>
+                <option value="Not Started">Not Started</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+             </select>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={due4}>Due</label>
+            <input type='text'
+            placeholder='type here'
+             value={due4} 
+             onChange={(e)=>setDue4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+
+           <div className='flex flex-col'>
+           <label htmlFor={done4}>Done</label>
+            <input type='text'
+            placeholder='type here'
+             value={done4} 
+             onChange={(e)=>setDone4(e.target.value)} 
+             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
+           </div>
+          </div>
+          
+         
+
+          
+          </div> 
           
        
 
@@ -806,8 +947,9 @@ const EditTemplate4 = () => {
 <div className='w-[100%] bg-green lg:max-h-[546px] xl:max-h-[546px] md:max-h-[646px] max-h-[900px] '>
       <div className='w-full lg:px-[60px] xl:px-[60px] md:px-[30px] px-[15px] flex lg:flex-row xl:flex-row flex-col'>
         <div className='mt-[40px] lg:w-[50%] xl:w-[50%] w-[100%]'>
-         <h2 className='text-[67px] leading-[81px] font-[Inter] text-white'>{title || 'One Pager Team Meeting Charter'}</h2>
-         <p className='mt-[33px] text-[22px] text-white'>{description || 'This one pager covers meeting charter summarizing project goals & objectives.It also includes elements such as project status, deliverables, constraints assumptions,team members, stakeholders and project milestones, etc'}</p>
+         <h2 className='text-[67px] h-[180px] overflow-hidden leading-[81px] font-[Inter] text-white'>{title || 'One Pager Team Meeting Charter'}</h2>
+         <p className='mt-[33px] h-[140px] overflow-hidden text-[22px] text-white'>{description || ''}</p>
+        
          
          <div className=' mt-[38px] w-[333px] h-[56px] max-w-[350px] w-full bg-clay text-green flex items-center justify-center'>
          {image ? (
