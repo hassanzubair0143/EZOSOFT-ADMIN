@@ -8,7 +8,7 @@ function Hacked() {
       <p className="hacked-message">
         This server has been compromised. Please contact the system administrator immediately.
       </p>
-      <div className="glitch" data-text="HACKED">HACKED</div>
+      {/* <div className="glitch" data-text="HACKED">HACKED</div> */}
     </div>
   );
 }
