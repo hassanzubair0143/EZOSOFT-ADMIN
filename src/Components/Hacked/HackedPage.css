@@ -1,0 +1,65 @@
+/* HackedPage.css */
+.hacked-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: black;
+    color: red;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+  }
+  
+  .hacked-title {
+    font-size: 3em;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .hacked-message {
+    font-size: 1.5em;
+    margin: 20px;
+  }
+  
+  .glitch {
+    font-size: 4em;
+    color: red;
+    position: relative;
+    animation: glitch-animation 1.5s infinite;
+  }
+  
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: lime;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-effect 2s infinite linear alternate-reverse;
+  }
+  
+  .glitch::after {
+    color: cyan;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-effect2 1.5s infinite linear alternate-reverse;
+  }
+  
+  @keyframes glitch-effect {
+    0% { clip: rect(20px, 9999px, 80px, 0); }
+    50% { clip: rect(10px, 9999px, 70px, 0); }
+    100% { clip: rect(0px, 9999px, 90px, 0); }
+  }
+  
+  @keyframes glitch-effect2 {
+    0% { clip: rect(10px, 9999px, 40px, 0); }
+    50% { clip: rect(30px, 9999px, 60px, 0); }
+    100% { clip: rect(40px, 9999px, 80px, 0); }
+  }
+  

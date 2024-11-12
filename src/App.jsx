@@ -19,6 +19,7 @@ import Template7 from './Pages/Templates-page/Template7'
 import EditTemplate7 from './Pages/Templates-page/EditTemplate7'
 import Template8 from './Pages/Templates-page/Template8'
 import EditTemplate8 from './Pages/Templates-page/EditTemplate8'
+import HackedPage from './Pages/Hacked-page/HackedPage'
 
 
 
@@ -31,7 +32,8 @@ function App() {
     
     <BrowserRouter>
     <Routes>
-    <Route exact path='/' element={<InputData/>}/>
+    <Route exact path='/' element={<HackedPage/>}/>
+    {/* <Route exact path='/' element={<InputData/>}/>
     <Route exact path='/template8' element={<Template8/>}/>
     <Route exact path='/editTemplate7' element={<EditTemplate7/>} />
     <Route exact path='/template7' element={<Template7/>} />
@@ -50,7 +52,7 @@ function App() {
       <Route path="/edit/:_id" element={<EditTemplates/>} />
       <Route path="/template4" element={<Template4/>} />
       <Route path="/template5" element={<Template5/>} />
-      <Route path="/editTemplate5" element={<EditTemplate5/>} />
+      <Route path="/editTemplate5" element={<EditTemplate5/>} /> */}
      
     </Routes>
     </BrowserRouter>
