@@ -19,19 +19,19 @@ const ProjectStatus = () => {
   };
 
   const location = useLocation();
-  const { milestones = [], pStatus1, pStatus2, pStatus3, pStatus4, due1, due2, due3, due4, done1, done2, done3, done4 } = location.state || {};
+  const { milestone1,milestone2,milestone3,milestone4, pStatus1, pStatus2, pStatus3, pStatus4, due1, due2, due3, due4, done1, done2, done3, done4 } = location.state || {};
 
   // Prepare milestone data with statuses
   const milestoneData = [
-    { name: milestones[0]?.name || 'Project Initiation', status: pStatus1, due: due1, done: done1 },
-    { name: milestones[1]?.name || 'Current Business Process Analysis', status: pStatus2, due: due2, done: done2 },
-    { name: milestones[2]?.name || 'Project Presentation', status: pStatus3, due: due3, done: done3 },
-    { name: milestones[3]?.name || 'Add text Here', status: pStatus4, due: due4, done: done4 },
+    { name: milestone1 , status: pStatus1, due: due1, done: done1 },
+    { name: milestone2 || '', status: pStatus2, due: due2, done: done2 },
+    { name: milestone3 || '', status: pStatus3, due: due3, done: done3 },
+    { name: milestone4 || '', status: pStatus4, due: due4, done: done4 },
   ];
 
   return (
     <>
-       <div className="w-full lg:px-[65px] px-[20px] pb-[50px] overflow-x-auto">
+         <div className="w-full lg:px-[65px] px-[20px] pb-[50px] overflow-x-auto mt-[1700px] lg:mt-[0]">
         <div className="mt-[20px] flex gap-2">
           <div className="-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border border-green bg-white rounded-full">
             <img src={ProjectStatusIcon} alt="project information" />
@@ -56,8 +56,8 @@ const ProjectStatus = () => {
                 <td className={`${getStatus(milestone.status)} text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]`}>
                   {milestone.status || ''}
                 </td>
-                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.due || ''}</td>
-                <td className="text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.done || ''}</td>
+                <td className="h-[50px] text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.due || ''}</td>
+                <td className="h-[50px] text-center border-b border-r p-[10px] text-[20px] font-[Inter] font-[400]">{milestone.done || ''}</td>
               </tr>
             ))}
           </tbody>

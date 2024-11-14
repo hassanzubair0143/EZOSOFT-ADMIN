@@ -136,10 +136,10 @@ const EditTemplate4 = () => {
 
   // Prepare milestone data with statuses
   const milestoneData = [
-    { name: milestones[0]?.milestone || '', status: pStatus1, due: due1, done: done1 },
-    { name: milestones[1]?.milestone || '', status: pStatus2, due: due2, done: done2 },
-    { name: milestones[2]?.milestone || '', status: pStatus3, due: due3, done: done3 },
-    { name: milestones[3]?.milestone || '', status: pStatus4, due: due4, done: done4 },
+    { name: milestone1 || '', status: pStatus1, due: due1, done: done1 },
+    { name: milestone2 || '', status: pStatus2, due: due2, done: done2 },
+    { name: milestone3 || '', status: pStatus3, due: due3, done: done3 },
+    { name: milestone4 || '', status: pStatus4, due: due4, done: done4 },
   ];
 
 
@@ -170,7 +170,7 @@ const EditTemplate4 = () => {
     navigate('/template4', {
       state: {
         title, description, buttonText, image,
-        milestones,formData,
+        milestone1,milestone2,milestone3,milestone4,formData,
         meetinggoals, meetinggoals2,
         info1, info2, info3,
         obj1, obj2, obj3, obj4,
@@ -208,8 +208,8 @@ const EditTemplate4 = () => {
         <form onSubmit={handleSubmit} className="w-full border border-[#D9D9D9] rounded-lg">
           <div className='bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] '>
            <div className='flex flex-col md:flex-row w-full gap-[35px]'>
-           <div className='flex md:w-[50%] gap-[55px] items-center justify-center'>
-           <label htmlFor="title" className="w-[10%]">Title:</label>
+           <div className='flex md:w-[50%] items-center justify-center'>
+           <label htmlFor="title" className=" md:w-[50%] lg:w-[25%] font-[Poppins] text-[14px] text-black leading-[21px] font-[400]">Title:</label>
             <input
               type="text"
               id="title"
@@ -220,8 +220,8 @@ const EditTemplate4 = () => {
             />
            </div>
 
-           <div className="flex items-center justify-center gap-[30px] sm:gap-[20px]">
-  <label htmlFor="image">Logo:</label>
+           <div className="flex items-center justify-center  gap-[30px] sm:gap-[20px]">
+  <label htmlFor="image" className='font-[Poppins] text-[14px] text-black leading-[21px] font-[400]'>Logo:</label>
   <div
     className="bg-[#F9F9F9] h-[40px] w-[140px] border border-dashed border-[#293950] flex items-center justify-center cursor-pointer rounded-lg"
     onClick={() => document.getElementById('image').click()} // This triggers the file input click
@@ -243,8 +243,8 @@ const EditTemplate4 = () => {
            </div>
             
          
-          <div className=' mt-[25px] flex items-center justify-center gap-[20px]'>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
+          <div className=' mt-[25px] flex flex-col sm:flex-row sm:items-center sm:justify-center'>
+            <label htmlFor="description" className="lg:w-[11%] w-[15%] font-[Poppins] text-[14px] text-black leading-[21px] font-[400]">Description:</label>
            <div className='flex flex-col w-full'>
            <textarea
               id="description"
@@ -267,40 +267,45 @@ const EditTemplate4 = () => {
            <div className='grid md:grid-cols-3 bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6 '>
             
            <div className='flex flex-col'>
-           <label htmlFor={pName}>Project Name</label>
+           <label htmlFor={pName} className='font-[Poppins] text-[14px] text-black leading-[21px] font-[400]'>Project Name</label>
             <input type='text'
+            placeholder='Text here'
              value={pName} 
              onChange={(e)=>setPname(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9]  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
 
            <div className='flex flex-col'>
-           <label htmlFor={pName}>Project Start date</label>
-            <input type='date'
+           <label htmlFor={pName} className='font-[Poppins] text-[14px] text-black leading-[21px] font-[400]'>Project Start date</label>
+            <input type='text'
+            placeholder='Type here'
              value={pStartDate} 
              onChange={(e)=>setStartdate(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border  border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
 
            <div className='flex flex-col'>
-           <label htmlFor={pEndDate}>Project Estimated Completion</label>
-            <input type='date'
+           <label htmlFor={pEndDate} className='font-[Poppins] text-[14px] text-black leading-[21px] font-[400] text-nowrap'>Project Estimated Completion</label>
+            <input type='text '
+            placeholder='Type here'
              value={pEndDate} 
              onChange={(e)=>setEnddate(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
 
            <div className='flex flex-col'>
-           <label htmlFor={pBudget}>Project Budget</label>
+           <label htmlFor={pBudget} className='font-[Poppins] text-[14px] text-black leading-[21px] font-[400]'>Project Budget</label>
             <input type='text'
+            placeholder='Type here'
              value={pBudget} 
              onChange={(e)=>setPbudget(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
 
            <div className='flex flex-col'>
-           <label htmlFor={pDesc}>Project Description</label>
+           <label htmlFor={pDesc} className='font-[Poppins] text-[14px] text-black leading-[21px] font-[400]'>Project Description</label>
             <input type='text'
+            placeholder='Type here'
              value={pDesc} 
              onChange={(e)=>setPdesc (e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9]  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -317,7 +322,7 @@ const EditTemplate4 = () => {
             <input type='text'
              value={pdtext1} 
              onChange={(e)=>setDtext1(e.target.value)} 
-             placeholder='type here'
+             placeholder='Type here'
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
           
 
@@ -325,14 +330,14 @@ const EditTemplate4 = () => {
           
             <input type='text'
              value={pdtext2} 
-             placeholder='type here'
+             placeholder='Type here'
              onChange={(e)=>setDtext2(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
           
 
            <input type='text'
              value={pdtext3} 
-             placeholder='type here'
+             placeholder='Type here'
              onChange={(e)=>setDtext3(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
@@ -351,7 +356,7 @@ const EditTemplate4 = () => {
                 key={index}
                   type="text"
                   id={`info${index + 1}`}
-                  placeholder='type here'
+                  placeholder='Type here'
                   value={info}
                   onChange={(e) => {
                     if (index === 0) setInfo1(e.target.value);
@@ -374,7 +379,7 @@ const EditTemplate4 = () => {
                 type="text"
                 id="meetinggoals"
                 value={meetinggoals}
-                placeholder='type here'
+                placeholder='Type here'
                 onChange={(e) => setGoals(e.target.value)}
                 className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -384,7 +389,7 @@ const EditTemplate4 = () => {
               <input
                 type="text"
                 id="meetinggoals2"
-                placeholder='type here'
+                placeholder='Type here'
                 value={meetinggoals2}
                 onChange={(e) => setGoals2(e.target.value)}
                 className="bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -404,7 +409,7 @@ const EditTemplate4 = () => {
                 <input
                 key={index}
                   type="text"
-                  placeholder='type here'
+                  placeholder='Type here'
                   id={`obj${index + 1}`}
                   value={obj}
                   onChange={(e) => {
@@ -488,7 +493,7 @@ const EditTemplate4 = () => {
            
            <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6'>
            <h2 className='font-[400] text-[20px] leading-[30px] font-[Poppins]'>Agenda 1</h2> 
-          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={meeting1}>Meetings</label>
             <input type='text'
@@ -536,7 +541,7 @@ const EditTemplate4 = () => {
           </div>
 
           <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 2</h2> 
-          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={meeting2}>Meetings</label>
             <input type='text'
@@ -589,7 +594,7 @@ const EditTemplate4 = () => {
 
 
           <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 3</h2> 
-          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={meeting3}>Meetings</label>
             <input type='text'
@@ -639,7 +644,7 @@ const EditTemplate4 = () => {
           </div>
              
           <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 4</h2>
-          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={meeting4}>Meetings</label>
             <input type='text'
@@ -689,7 +694,7 @@ const EditTemplate4 = () => {
           </div>
           
           <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Agenda 5</h2>
-          <div className='grid w-full gap-6 md:grid-cols-3 mt-[10px]'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={meeting5}>Meetings</label>
             <input type='text'
@@ -748,11 +753,11 @@ const EditTemplate4 = () => {
            
           <div className='  bg-[#FFFFFF] border border-[#D9D9D9] rounded-lg m-[30px] md:mx-[60px] p-[35px] gap-6'>
            <h2 className='font-[400] text-[20px] leading-[30px] font-[Poppins]'>Status 1</h2> 
-          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={milestone1}>Milestones</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={milestone1} 
              onChange={(e)=>setMilestone1(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -760,23 +765,23 @@ const EditTemplate4 = () => {
 
            <div className='flex flex-col'>
            <label htmlFor={pStatus1}>Status</label>
-            <select 
+           <div className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'> <select 
            
-             value={pStatus1} 
-             onChange={(e)=>setpStatus1(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
-               <option value="">Select status</option>
-                <option value="Not Started">Not Started</option>
-                <option value="Completed">Completed</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-             </select>
+           value={pStatus1} 
+           onChange={(e)=>setpStatus1(e.target.value)} 
+           className='w-full bg-[#F9F9F9] outline-none'>
+             <option value="">Select status</option>
+              <option value="Not Started">Not Started</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+           </select></div>
            </div>
 
            <div className='flex flex-col'>
            <label htmlFor={due1}>Due</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={due1} 
              onChange={(e)=>setDue1(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -785,7 +790,7 @@ const EditTemplate4 = () => {
            <div className='flex flex-col'>
            <label htmlFor={done1}>Done</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={done1} 
              onChange={(e)=>setDone1(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -793,11 +798,11 @@ const EditTemplate4 = () => {
           </div>
 
           <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Status 2</h2> 
-          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={milestone2}>Milestones</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={milestone2} 
              onChange={(e)=>setMilestone2(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -805,22 +810,22 @@ const EditTemplate4 = () => {
 
            <div className='flex flex-col'>
            <label htmlFor={pStatus2}>Status</label>
-            <select 
+            <div className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'><select 
            
-             value={pStatus2} 
-             onChange={(e)=>setpStatus2(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
-               <option value="">Select status</option>
-                <option value="Not Started">Not Started</option>
-                <option value="Completed">Completed</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-             </select>
+           value={pStatus2} 
+           onChange={(e)=>setpStatus2(e.target.value)} 
+           className='w-full bg-[#F9F9F9] outline-none'>
+             <option value="">Select status</option>
+              <option value="Not Started">Not Started</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+           </select></div>
            </div>
 
            <div className='flex flex-col'>
            <label htmlFor={due2}>Due</label>
-            <input type='text'
+            <input type='Text'
             placeholder='type here'
              value={due2} 
              onChange={(e)=>setDue2(e.target.value)} 
@@ -830,7 +835,7 @@ const EditTemplate4 = () => {
            <div className='flex flex-col'>
            <label htmlFor={done2}>Done</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={done2} 
              onChange={(e)=>setDone2(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -839,11 +844,11 @@ const EditTemplate4 = () => {
 
 
           <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Status 3</h2> 
-          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={milestone3}>Milestones</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={milestone3} 
              onChange={(e)=>setMilestone3(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -851,24 +856,24 @@ const EditTemplate4 = () => {
 
            <div className='flex flex-col'>
            <label htmlFor={pStatus3}>Status</label>
-            <select 
+            <div className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'><select 
            
-             value={pStatus3} 
-             onChange={(e)=>setpStatus3(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
-               <option value="">Select status</option>
-                <option value="Not Started">Not Started</option>
-                <option value="Completed">Completed</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-             </select>
+           value={pStatus3} 
+           onChange={(e)=>setpStatus3(e.target.value)} 
+           className='w-full bg-[#F9F9F9] outline-none'>
+             <option value="">Select status</option>
+              <option value="Not Started">Not Started</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+           </select></div>
            </div>
 
            <div className='flex flex-col'>
            <label htmlFor={due3}>Due</label>
             <input type='text'
-            placeholder='type here'
-             value={due1} 
+            placeholder='Type here'
+             value={due3} 
              onChange={(e)=>setDue3(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
            </div>
@@ -876,7 +881,7 @@ const EditTemplate4 = () => {
            <div className='flex flex-col'>
            <label htmlFor={done3}>Done</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={done3} 
              onChange={(e)=>setDone3(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -885,11 +890,11 @@ const EditTemplate4 = () => {
              
           <h2 className='font-[400] mt-[50px] text-[20px] leading-[30px] font-[Poppins]'>Status 4</h2>
          
-          <div className='grid w-full gap-6 md:grid-cols-3'>
+          <div className='grid w-full gap-6 md:grid-cols-3 mt-[20px]'>
           <div className='flex flex-col'>
            <label htmlFor={milestone4}>Milestones</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={milestone4} 
              onChange={(e)=>setMilestone4(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -897,23 +902,23 @@ const EditTemplate4 = () => {
 
            <div className='flex flex-col'>
            <label htmlFor={pStatus4}>Status</label>
-            <select 
+           <div className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'> <select 
            
-             value={pStatus4} 
-             onChange={(e)=>setpStatus4(e.target.value)} 
-             className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'>
-               <option value="">Select status</option>
-                <option value="Not Started">Not Started</option>
-                <option value="Completed">Completed</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-             </select>
+           value={pStatus4} 
+           onChange={(e)=>setpStatus4(e.target.value)} 
+           className='w-full bg-[#F9F9F9] outline-none'>
+             <option value="">Select status</option>
+              <option value="Not Started">Not Started</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+           </select></div>
            </div>
 
            <div className='flex flex-col'>
            <label htmlFor={due4}>Due</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={due4} 
              onChange={(e)=>setDue4(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -922,7 +927,7 @@ const EditTemplate4 = () => {
            <div className='flex flex-col'>
            <label htmlFor={done4}>Done</label>
             <input type='text'
-            placeholder='type here'
+            placeholder='Type here'
              value={done4} 
              onChange={(e)=>setDone4(e.target.value)} 
              className='bg-[#F9F9F9] px-4 py-2 border border-[#D9D9D9] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'/>
@@ -1240,8 +1245,8 @@ const EditTemplate4 = () => {
           </table>
           </div> 
           
-
-          <div className="w-full lg:px-[65px] px-[20px] pb-[50px] overflow-x-auto">
+          
+          <div className="w-full lg:px-[65px] px-[20px] pb-[50px] overflow-x-auto mt-[1700px] lg:mt-[0]">
         <div className="mt-[20px] flex gap-2">
           <div className="-ml-[20px] w-[44px] h-[44px] flex items-center justify-center border border-green bg-white rounded-full">
             <img src={ProjectStatusIcon} alt="project information" />
@@ -1285,8 +1290,9 @@ const EditTemplate4 = () => {
           >
             Get Template
           </button>
+     
         </form>
-
+      
       
       </div>
 
