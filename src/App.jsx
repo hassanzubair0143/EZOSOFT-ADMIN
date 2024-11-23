@@ -32,7 +32,7 @@ function App() {
     
     <BrowserRouter>
     <Routes>
-    {/* <Route exact path='/' element={<HackedPage/>}/> */}
+   
     <Route exact path='/' element={<InputData/>}/>
     <Route exact path='/template8' element={<Template8/>}/>
     <Route exact path='/editTemplate7' element={<EditTemplate7/>} />
